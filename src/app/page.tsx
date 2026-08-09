@@ -52,7 +52,7 @@ export default function Home() {
               href="https://git.hsw.is/provence"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-0.5 transition-opacity hover:opacity-75"
+              className="mt-1 flex flex-col items-center gap-0.5 transition-opacity hover:opacity-75"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
