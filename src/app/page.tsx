@@ -9,11 +9,11 @@ export default function Home() {
             Apprendre le français
           </h1>
           <p className="max-w-md text-lg">
-            Ce site est en cours de développement.
+            Ce site est en cours de développement. Vous pouvez accéder au site
+            via les liens ci-dessous.
           </p>
           <div>
             <p className="max-w-md text-lg text-zinc-600 dark:text-zinc-400">
-              Vous pouvez accéder au site via : <br />
               <a
                 href="https://francais.hsw.is"
                 target="_blank"
