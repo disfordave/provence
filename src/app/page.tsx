@@ -1,40 +1,73 @@
+import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            Apprendre le français
+    <>
+      <header className="flex items-center p-4">
+        <div className="flex-1"></div>
+        <h2 className="">
+          <a href="/" className="select-none">
+            <Logo size="xl" />
+          </a>
+        </h2>
+        <div className="flex-1"></div>
+      </header>
+      <main className="h-full">
+        <div className="flex h-full flex-col items-center justify-center gap-2 px-4 sm:gap-4">
+          <h1 className="text-center text-2xl leading-none font-extrabold tracking-tighter text-nowrap uppercase sm:text-4xl">
+            Bonjour et <br />
+            bienvenue sur <br />
+            <span className="text-blue-600 dark:text-blue-400">
+              La langue française
+            </span>
           </h1>
-          <p className="max-w-md text-lg">
-            Ce site est en cours de développement. Vous pouvez accéder au site
-            via les liens ci-dessous.
+          <p className="text-center text-base font-medium sm:text-lg">
+            Ce site est en cours de développement.
+            <br /> Vous pouvez accéder au site via les liens ci-dessous.
           </p>
-          <div>
-            <p className="max-w-md text-lg text-zinc-600 dark:text-zinc-400">
+          <div className="text-center text-base sm:text-lg">
+            <p className="max-w-md text-zinc-600 dark:text-zinc-400">
               <a
                 href="https://francais.hsw.is"
-                target="_blank"
-                rel="noopener noreferrer"
+
                 className="underline hover:no-underline"
               >
                 francais.hsw.is
               </a>
-              <span> ou </span>
+            </p>
+            <p className="max-w-md text-zinc-600 dark:text-zinc-400">
               <a
                 href="https://fr.hsw.is"
-                target="_blank"
-                rel="noopener noreferrer"
+
                 className="underline hover:no-underline"
               >
                 fr.hsw.is
               </a>
             </p>
           </div>
+          <div>
+            <a
+              href="https://git.hsw.is/provence"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-0.5 transition-opacity hover:opacity-75"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                className="bi bi-github size-8"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+              </svg>
+              <p className="text-center text-xs">Contribuer</p>
+            </a>
+          </div>
         </div>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
