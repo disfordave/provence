@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 export default async function Page({
@@ -6,7 +7,22 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { default: Post } = await import(`@/content/${slug}.mdx`);
+
+  let Post: React.ComponentType;
+
+  try {
+    ({ default: Post } = await import(`@/content/${slug}.mdx`));
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      (error.message.includes("Cannot find module") ||
+        error.message.includes("Module not found"))
+    ) {
+      notFound();
+    }
+
+    throw error;
+  }
 
   return (
     <article className="prose prose-slate dark:prose-invert mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:py-6">
