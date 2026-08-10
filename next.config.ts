@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
-const nextConfig: NextConfig = {/* config options here */};
+const nextConfig: NextConfig = {
+  /* config options here */
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+};
 
-export default nextConfig;
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+  options: {
+    remarkPlugins: ["remark-gfm"],
+  },
+  extension: /\.(md|mdx)$/,
+});
+
+export default withMDX(nextConfig);
 
 import("@opennextjs/cloudflare").then((m) => m.initOpenNextCloudflareForDev());
