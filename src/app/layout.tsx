@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="fr"
       className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}
     >
-      <body className="flex flex-col">
+      <body className="mx-auto flex max-w-[1380px] flex-col">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

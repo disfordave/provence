@@ -31,7 +31,7 @@ export default async function Page({
         <div className="hidden lg:col-span-1 lg:block" aria-hidden="true"></div>
         <article
           data-mdx-content
-          className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline col-span-2 mx-auto"
+          className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline col-span-2 mx-auto lg:max-w-full"
         >
           <Post />
         </article>
