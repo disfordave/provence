@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import TableOfContents from "@/components/TableOfContents";
 
 export default async function Page({
   params,
@@ -25,9 +26,20 @@ export default async function Page({
   }
 
   return (
-    <article className="prose prose-slate dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:py-6">
-      <Post />
-    </article>
+    <>
+      <div className="p-4 lg:grid lg:grid-cols-4 lg:gap-4">
+        <div className="hidden lg:col-span-1 lg:block" aria-hidden="true"></div>
+        <article
+          data-mdx-content
+          className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline col-span-2 mx-auto"
+        >
+          <Post />
+        </article>
+        <div className="hidden rounded-2xl border border-neutral-200 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block dark:border-neutral-800">
+          <TableOfContents />
+        </div>
+      </div>
+    </>
   );
 }
 
