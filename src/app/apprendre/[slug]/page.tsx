@@ -1,3 +1,5 @@
+import { readFile } from "fs/promises";
+import path from "path";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/TableOfContents";
@@ -43,7 +45,31 @@ export default async function Page({
   );
 }
 
-export const metadata: Metadata = {
-  title: "Bienvenue sur la langue française",
-  description: "Apprendre le français de manière interactive et efficace",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  let title = "La langue française";
+
+  try {
+    const source = await readFile(
+      path.join(process.cwd(), "src/content", `${slug}.mdx`),
+      "utf-8",
+    );
+    const match = source.match(/^#\s+(.+)$/m);
+
+    if (match) {
+      title = `${match[1].trim()} | La langue française`;
+    }
+  } catch {
+    // fall back to default title
+  }
+
+  return {
+    title,
+    description: "Apprendre le français de manière interactive et efficace",
+  };
+}
