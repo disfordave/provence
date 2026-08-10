@@ -1,6 +1,5 @@
 import type { MDXComponents } from "mdx/types";
 import type { ReactNode } from "react";
-import { slugifyText } from "@/lib/slug";
 
 function getTextContent(children: ReactNode): string {
   if (children == null || typeof children === "boolean") {
@@ -24,6 +23,17 @@ function getTextContent(children: ReactNode): string {
   return "";
 }
 
+function slugify(children: ReactNode): string {
+  const text = getTextContent(children)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return text || "section";
+}
+
 function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
   const HeadingTag = `h${level}` as const;
 
@@ -35,7 +45,7 @@ function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
     return (
       <HeadingTag
         {...props}
-        id={slugifyText(getTextContent(children))}
+        id={slugify(children)}
         className={["scroll-mt-24", className].filter(Boolean).join(" ")}
       >
         {children}

@@ -16,10 +16,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "La langue française",
-    template: "%s | La langue française",
-  },
+  title: "La langue française",
   description: "Apprendre le français de manière interactive et efficace",
 };
 

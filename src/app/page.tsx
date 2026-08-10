@@ -1,17 +1,19 @@
-import Link from "next/link";
+import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <>
       <div className="flex h-full flex-col items-center justify-center gap-2 px-4 sm:gap-4">
         <h1 className="text-center text-2xl leading-none font-extrabold tracking-tighter text-nowrap uppercase sm:text-4xl">
-          <Link href="/apprendre/bienvenue">
+          <a href="/apprendre/bienvenue">
             Bonjour et <br />
             bienvenue sur <br />
             <span className="text-blue-600 dark:text-blue-400">
               La langue française
             </span>
-          </Link>
+          </a>
         </h1>
         <p className="text-center text-base font-medium sm:text-lg">
           Ce site est en cours de développement.
@@ -21,6 +23,7 @@ export default function Home() {
           <p className="max-w-md text-zinc-600 dark:text-zinc-400">
             <a
               href="https://francais.hsw.is"
+
               className="underline hover:no-underline"
             >
               francais.hsw.is
@@ -29,6 +32,7 @@ export default function Home() {
           <p className="max-w-md text-zinc-600 dark:text-zinc-400">
             <a
               href="https://fr.hsw.is"
+
               className="underline hover:no-underline"
             >
               fr.hsw.is

@@ -6,7 +6,6 @@ import eslintConfigPrettier from "eslint-config-prettier/flat";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  eslintConfigPrettier,
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -14,10 +13,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Cloudflare build output:
-    ".open-next/**",
-    ".wrangler/**",
   ]),
 ]);
 
-export default eslintConfig;
+export default [eslintConfig, eslintConfigPrettier];

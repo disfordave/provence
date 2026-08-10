@@ -1,6 +1,36 @@
-import type { Heading } from "@/lib/content";
+"use client";
 
-export default function TableOfContents({ items }: { items: Heading[] }) {
+import { useEffect, useState } from "react";
+
+type TocItem = {
+  id: string;
+  level: number;
+  text: string;
+};
+
+function getHeadings(): TocItem[] {
+  const article = document.querySelector("[data-mdx-content]");
+
+  if (!article) {
+    return [];
+  }
+
+  return Array.from(article.querySelectorAll<HTMLHeadingElement>("h2, h3, h4"))
+    .map((heading) => ({
+      id: heading.id,
+      level: Number(heading.tagName.slice(1)),
+      text: heading.textContent?.trim() ?? "",
+    }))
+    .filter((heading) => heading.id && heading.text.length > 0);
+}
+
+export default function TableOfContents() {
+  const [items, setItems] = useState<TocItem[]>([]);
+
+  useEffect(() => {
+    setItems(getHeadings());
+  }, []);
+
   if (items.length === 0) {
     return null;
   }
