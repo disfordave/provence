@@ -1,8 +1,31 @@
-import { readFile } from "fs/promises";
-import path from "path";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/TableOfContents";
+
+// `@types/mdx` only declares the default export, so the metadata each article
+// exports has to be described here.
+type Article = {
+  default: React.ComponentType;
+  metadata?: { title?: string };
+};
+
+// The MDX modules are bundled at build time; the deployed worker has no
+// filesystem, so everything about an article must come from its module.
+async function loadArticle(slug: string): Promise<Article | null> {
+  try {
+    return (await import(`@/content/${slug}.mdx`)) as Article;
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      (error.message.includes("Cannot find module") ||
+        error.message.includes("Module not found"))
+    ) {
+      return null;
+    }
+
+    throw error;
+  }
+}
 
 export default async function Page({
   params,
@@ -10,22 +33,13 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const article = await loadArticle(slug);
 
-  let Post: React.ComponentType;
-
-  try {
-    ({ default: Post } = await import(`@/content/${slug}.mdx`));
-  } catch (error) {
-    if (
-      error instanceof Error &&
-      (error.message.includes("Cannot find module") ||
-        error.message.includes("Module not found"))
-    ) {
-      notFound();
-    }
-
-    throw error;
+  if (!article) {
+    notFound();
   }
+
+  const Post = article.default;
 
   return (
     <>
@@ -51,25 +65,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-
-  let title = "La langue française";
-
-  try {
-    const source = await readFile(
-      path.join(process.cwd(), "src/content", `${slug}.mdx`),
-      "utf-8",
-    );
-    const match = source.match(/^#\s+(.+)$/m);
-
-    if (match) {
-      title = `${match[1].trim()} | La langue française`;
-    }
-  } catch {
-    // fall back to default title
-  }
+  const article = await loadArticle(slug);
+  const articleTitle = article?.metadata?.title?.trim();
 
   return {
-    title,
+    title: articleTitle
+      ? `${articleTitle} | La langue française`
+      : "La langue française",
     description: "Apprendre le français de manière interactive et efficace",
   };
 }
