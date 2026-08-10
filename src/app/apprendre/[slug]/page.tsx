@@ -25,7 +25,7 @@ export default async function Page({
   }
 
   return (
-    <article className="prose prose-slate dark:prose-invert mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:py-6">
+    <article className="prose prose-slate dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:py-6">
       <Post />
     </article>
   );
