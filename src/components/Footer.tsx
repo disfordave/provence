@@ -1,5 +1,3 @@
-import Logo from "@/components/Logo";
-
 export default function Footer() {
   const startYear = 2026;
   const currentYear = new Date().getFullYear();
