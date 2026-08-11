@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 function getTextContent(children: ReactNode): string {
@@ -61,6 +62,14 @@ const components: MDXComponents = {
   h4: createHeading(4),
   h5: createHeading(5),
   h6: createHeading(6),
+  a: ({ href, ...props }) => {
+    if (href?.startsWith("http")) {
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" {...props} />
+      );
+    }
+    return <Link href={href ?? ""} {...props} />;
+  },
 };
 
 export function useMDXComponents(): MDXComponents {
