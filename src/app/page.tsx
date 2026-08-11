@@ -1,19 +1,20 @@
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
       <div className="flex h-full flex-col items-center justify-center gap-2 px-4 sm:gap-4">
         <h1 className="text-center text-2xl leading-none font-extrabold tracking-tighter text-nowrap uppercase sm:text-4xl">
-          <a href="/apprendre/bienvenue">
+          <Link href="/apprendre/bienvenue">
             Bonjour et <br />
             bienvenue sur <br />
             <span className="text-blue-600 dark:text-blue-400">
               La langue française
             </span>
-          </a>
+          </Link>
         </h1>
         <p className="text-center text-base font-medium sm:text-lg">
           Ce site est en cours de développement.

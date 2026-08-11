@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type TocItem = {
@@ -46,12 +47,12 @@ export default function TableOfContents() {
               item.level === 3 ? "ml-4" : item.level === 4 ? "ml-8" : ""
             }
           >
-            <a
+            <Link
               href={`#${item.id}`}
               className="transition-colors hover:text-neutral-950 dark:hover:text-white"
             >
               {item.text}
-            </a>
+            </Link>
           </li>
         ))}
       </ol>
