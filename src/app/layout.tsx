@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "La langue française",
   description: "Apprendre le français de manière interactive et efficace",
   metadataBase: process.env.METADATA_BASE_URL,
+  appleWebApp: {
+    title: "Français",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
