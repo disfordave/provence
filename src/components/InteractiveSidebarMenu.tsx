@@ -32,7 +32,7 @@ export default function InteractiveSidebarMenu({
       ></button>
       <div
         className={`fixed inset-x-4 inset-y-4 z-40 block max-w-96 overflow-auto bg-neutral-50/25 p-6 shadow-xl backdrop-blur-xl lg:hidden dark:bg-neutral-950/25 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"} rounded-2xl border border-neutral-500/25 transition-all duration-300`}
-        aria-label="Sidebar Menu"
+        aria-label="Menu latéral"
         aria-hidden={!isOpen}
       >
         {children}
@@ -44,7 +44,7 @@ export default function InteractiveSidebarMenu({
           onClick={() => setIsOpen(!isOpen)}
           className="fixed right-8 bottom-8 z-50 block rounded-full bg-neutral-950 p-3 text-nowrap text-white shadow-xl transition-colors hover:bg-neutral-800 lg:hidden dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
           aria-expanded={isOpen}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
           {isOpen ? (
             <XMarkIcon className="size-6" />
