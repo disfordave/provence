@@ -6,6 +6,7 @@ import eslintConfigPrettier from "eslint-config-prettier/flat";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  eslintConfigPrettier,
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -16,4 +17,4 @@ const eslintConfig = defineConfig([
   ]),
 ]);
 
-export default [eslintConfig, eslintConfigPrettier];
+export default eslintConfig;
