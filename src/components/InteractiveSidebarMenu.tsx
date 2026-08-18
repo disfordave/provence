@@ -31,7 +31,7 @@ export default function InteractiveSidebarMenu({
         tabIndex={-1}
       ></button>
       <div
-        className={`fixed inset-y-0 left-0 z-40 block w-full max-w-96 overflow-auto bg-neutral-50/25 p-8 shadow-xl backdrop-blur-xl lg:hidden dark:bg-neutral-950/25 ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300`}
+        className={`fixed inset-y-0 left-0 z-40 block w-full max-w-96 overflow-auto bg-neutral-50/25 p-8 shadow-xl backdrop-blur-xl lg:hidden dark:bg-neutral-950/25 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"} transition-all duration-300`}
         aria-label="Sidebar Menu"
         aria-hidden={!isOpen}
       >
