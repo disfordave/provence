@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import TableOfContents from "@/components/TableOfContents";
 import CourseList from "@/components/CourseList";
 import InteractiveSidebarMenu from "@/components/InteractiveSidebarMenu";
@@ -68,14 +68,18 @@ export default async function Page({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: Promise<{ slug: string }>;
+  },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = await params;
   const article = await loadArticle(slug);
   const articleTitle = article?.metadata?.title?.trim();
+  const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
     title: articleTitle
@@ -85,6 +89,7 @@ export async function generateMetadata({
     openGraph: {
       title: articleTitle ? articleTitle : "La langue française",
       description: "Apprendre le français de manière interactive et efficace",
+      images: previousImages,
     },
   };
 }
