@@ -8,15 +8,17 @@ export default function Home() {
     <>
       <div className="flex h-full flex-col items-center justify-center gap-2 px-4 sm:gap-4">
         <h1 className="text-center text-2xl leading-none font-extrabold tracking-tighter text-nowrap uppercase sm:text-4xl">
-          <Link href="/apprendre/bienvenue">
-            Bonjour et <br />
-            bienvenue sur <br />
-            <span className="text-blue-600 dark:text-blue-400">
-              La langue française
-            </span>
-          </Link>
+          Bonjour et <br />
+          bienvenue sur <br />
+          <span className="font-extrabold">La langue française</span>
         </h1>
-        <p className="text-center text-base font-medium sm:text-lg">
+        <Link
+          href="/cours/bienvenue"
+          className="rounded-full bg-neutral-800 px-4 py-2 text-nowrap text-white transition-colors hover:bg-neutral-700 dark:bg-neutral-400 dark:hover:bg-neutral-500"
+        >
+          Apprendre le français
+        </Link>
+        <p className="text-center text-base font-normal sm:text-lg">
           Ce site est en cours de développement.
           <br /> Vous pouvez accéder au site via les liens ci-dessous.
         </p>

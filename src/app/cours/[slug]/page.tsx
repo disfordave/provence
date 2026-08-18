@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/TableOfContents";
+import ContentMenu from "@/components/ContentMenu";
 
 // `@types/mdx` only declares the default export, so the metadata each article
 // exports has to be described here.
-type Article = {
+export type Article = {
   default: React.ComponentType;
   metadata?: { title?: string };
 };
@@ -44,7 +45,9 @@ export default async function Page({
   return (
     <>
       <div className="p-4 lg:grid lg:grid-cols-4 lg:gap-4">
-        <div className="hidden lg:col-span-1 lg:block" aria-hidden="true"></div>
+        <div className="hidden rounded-2xl border border-neutral-200 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block dark:border-neutral-800">
+          <ContentMenu />
+        </div>
         <article
           data-mdx-content
           className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline col-span-2 mx-auto lg:mx-0 lg:max-w-full"
