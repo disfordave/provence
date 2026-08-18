@@ -82,5 +82,9 @@ export async function generateMetadata({
       ? `${articleTitle} | La langue française`
       : "La langue française",
     description: "Apprendre le français de manière interactive et efficace",
+    openGraph: {
+      title: articleTitle ? articleTitle : "La langue française",
+      description: "Apprendre le français de manière interactive et efficace",
+    },
   };
 }
