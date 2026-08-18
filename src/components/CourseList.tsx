@@ -9,6 +9,8 @@ type Post = {
 };
 
 export async function getPosts(): Promise<Post[]> {
+  "use server";
+
   const contentDir = path.join(process.cwd(), "src", "content");
 
   const files = await readdir(contentDir, {
@@ -35,7 +37,7 @@ export async function getPosts(): Promise<Post[]> {
   return posts;
 }
 
-export default async function ContentMenu() {
+export default async function CourseList() {
   const posts = await getPosts();
 
   return (

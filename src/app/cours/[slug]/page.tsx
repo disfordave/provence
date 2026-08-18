@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/TableOfContents";
-import ContentMenu from "@/components/ContentMenu";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import CourseList from "@/components/CourseList";
+import InteractiveSidebarMenu from "@/components/InteractiveSidebarMenu";
 
 // `@types/mdx` only declares the default export, so the metadata each article
 // exports has to be described here.
@@ -46,7 +48,7 @@ export default async function Page({
     <>
       <div className="p-4 lg:grid lg:grid-cols-4 lg:gap-4">
         <div className="hidden rounded-2xl border border-neutral-200 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block dark:border-neutral-800">
-          <ContentMenu />
+          <CourseList />
         </div>
         <article
           data-mdx-content
@@ -58,6 +60,9 @@ export default async function Page({
           <TableOfContents />
         </div>
       </div>
+      <InteractiveSidebarMenu>
+        <CourseList />
+      </InteractiveSidebarMenu>
     </>
   );
 }
