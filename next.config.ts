@@ -10,6 +10,9 @@ const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
     remarkPlugins: ["remark-gfm"],
+    // Gives every heading a unique id, so repeated headings get a numbered
+    // suffix instead of colliding.
+    rehypePlugins: ["rehype-slug"],
   },
   extension: /\.(md|mdx)$/,
 });

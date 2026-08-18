@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type TocItem = {
   id: string;
@@ -9,28 +9,64 @@ type TocItem = {
   text: string;
 };
 
+const NO_HEADINGS: TocItem[] = [];
+
+// The headings only exist in the rendered DOM, so the article is treated as an
+// external store. `useSyncExternalStore` compares snapshots by identity, so the
+// parsed headings are cached and only replaced when the article really changes.
+let snapshot: TocItem[] = NO_HEADINGS;
+let snapshotKey = "";
+
 function getHeadings(): TocItem[] {
   const article = document.querySelector("[data-mdx-content]");
 
   if (!article) {
-    return [];
+    return NO_HEADINGS;
   }
 
-  return Array.from(article.querySelectorAll<HTMLHeadingElement>("h2, h3, h4"))
+  const headings = Array.from(
+    article.querySelectorAll<HTMLHeadingElement>("h2, h3, h4"),
+  )
     .map((heading) => ({
       id: heading.id,
       level: Number(heading.tagName.slice(1)),
       text: heading.textContent?.trim() ?? "",
     }))
     .filter((heading) => heading.id && heading.text.length > 0);
+
+  const key = headings
+    .map((heading) => `${heading.level}:${heading.id}:${heading.text}`)
+    .join("|");
+
+  if (key !== snapshotKey) {
+    snapshotKey = key;
+    snapshot = headings;
+  }
+
+  return snapshot;
+}
+
+function subscribe(onStoreChange: () => void) {
+  const article = document.querySelector("[data-mdx-content]");
+
+  if (!article) {
+    return () => {};
+  }
+
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(article, { childList: true, subtree: true });
+
+  return () => observer.disconnect();
+}
+
+// The server has no DOM to read, so it renders nothing and the headings appear
+// once the client takes over.
+function getServerSnapshot(): TocItem[] {
+  return NO_HEADINGS;
 }
 
 export default function TableOfContents() {
-  const [items, setItems] = useState<TocItem[]>([]);
-
-  useEffect(() => {
-    setItems(getHeadings());
-  }, []);
+  const items = useSyncExternalStore(subscribe, getHeadings, getServerSnapshot);
 
   if (items.length === 0) {
     return null;

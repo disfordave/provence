@@ -9,7 +9,6 @@ type Post = {
 };
 
 export async function getPosts(): Promise<Post[]> {
-
   const contentDir = path.join(process.cwd(), "src", "content");
 
   const files = await readdir(contentDir, {

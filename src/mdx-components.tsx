@@ -1,40 +1,8 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
-function getTextContent(children: ReactNode): string {
-  if (children == null || typeof children === "boolean") {
-    return "";
-  }
-
-  if (typeof children === "string" || typeof children === "number") {
-    return String(children);
-  }
-
-  if (Array.isArray(children)) {
-    return children.map(getTextContent).join("");
-  }
-
-  if (typeof children === "object" && "props" in children) {
-    return getTextContent(
-      (children as { props?: { children?: ReactNode } }).props?.children,
-    );
-  }
-
-  return "";
-}
-
-function slugify(children: ReactNode): string {
-  const text = getTextContent(children)
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-  return text || "section";
-}
-
+// The `id` comes from the `rehype-slug` plugin configured in `next.config.ts`,
+// which also disambiguates headings that share the same text.
 function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
   const HeadingTag = `h${level}` as const;
 
@@ -46,7 +14,6 @@ function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
     return (
       <HeadingTag
         {...props}
-        id={slugify(children)}
         className={["scroll-mt-24", className].filter(Boolean).join(" ")}
       >
         {children}

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/TableOfContents";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import CourseList from "@/components/CourseList";
 import InteractiveSidebarMenu from "@/components/InteractiveSidebarMenu";
 
@@ -12,8 +11,8 @@ export type Article = {
   metadata?: { title?: string };
 };
 
-// The MDX modules are bundled at build time; the deployed worker has no
-// filesystem, so everything about an article must come from its module.
+// The MDX modules are bundled at build time, so everything about an article
+// must come from its module rather than from the filesystem.
 async function loadArticle(slug: string): Promise<Article | null> {
   try {
     return (await import(`@/content/${slug}.mdx`)) as Article;

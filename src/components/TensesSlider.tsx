@@ -11,7 +11,7 @@ export default function TensesSlider() {
         <p className="text-center text-xl font-black">Les Temps</p>
         <div className="flex w-full flex-col gap-1">
           <p className="text-center leading-tight font-bold">
-            Le moment de l'événement
+            Le moment de l&apos;événement
           </p>
           <div className="flex w-full justify-between">
             <div className="flex-1 text-start">Passé</div>
