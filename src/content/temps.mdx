@@ -1,22 +1,39 @@
 export const metadata = { title: "Les temps du français" };
 
+import TensesSlider from "@/components/TensesSlider";
+
 # Les temps du français
 
 ## Liens utiles
 
 - [Recherche de conjugaison sur NouvelObs](https://la-conjugaison.nouvelobs.com/)
 
-import TensesSlider from "@/components/TensesSlider";
+## Repères
+
+- **1<sup>er</sup> groupe** : verbes en **-er**
+- **2<sup>e</sup> groupe** : verbes réguliers en **-ir** avec participe présent en **-issant**
+- **3<sup>e</sup> groupe** : les autres verbes
+- **Sujet** : Je / Tu / Il, Elle, On / Nous / Vous / Ils, Elles
+- **Infinitif** : forme non conjuguée du verbe
+- **Participe passé** : gagné, fini, vendu, fait, venu...
+
+### Ordre des pronoms
+
+> me / te / se / nous / vous → le / la / les → lui / leur → y → en → verbe
 
 <div className="">
   <TensesSlider />
 </div>
 
-## Présent
+---
 
-### Le présent
+# Présent
+
+## Le présent
 
 > Sujet + présent
+
+**Exemple :** Je gagne un bon salaire.
 
 | Sujet      | 1<sup>er</sup> | 2<sup>e</sup> |
 | ---------- | -------------- | ------------- |
@@ -27,24 +44,50 @@ import TensesSlider from "@/components/TensesSlider";
 | Vous       | -ez            | -issez        |
 | Ils/Elles  | -ent           | -issent       |
 
-## Passé
+### Verbes fréquents
 
-### Le passé composé
+| Sujet      | avoir | être    | aller   | venir     | faire    | savoir  |
+| ---------- | ----- | ------- | ------- | --------- | -------- | ------- |
+| Je         | ai    | suis    | vais    | viens     | fais     | sais    |
+| Tu         | as    | es      | vas     | viens     | fais     | sais    |
+| Il/Elle/On | a     | est     | va      | vient     | fait     | sait    |
+| Nous       | avons | sommes  | allons  | venons    | faisons  | savons  |
+| Vous       | avez  | êtes    | allez   | venez     | faites   | savez   |
+| Ils/Elles  | ont   | sont    | vont    | viennent  | font     | savent  |
+
+---
+
+# Passé
+
+## Le passé composé
 
 > Sujet + avoir / être (présent) + participe passé
 
-| Sujet      | avoir/être   | 1<sup>er</sup> | 2<sup>e</sup> |
-| ---------- | ------------ | -------------- | ------------- |
-| Je         | ai/suis      | -é             | -i            |
-| Tu         | as/es        | -é             | -i            |
-| Il/Elle/On | a/est        | -é             | -i            |
-| Nous       | avons/sommes | -é             | -i            |
-| Vous       | avez/êtes    | -é             | -i            |
-| Ils/Elles  | ont/sont     | -é             | -i            |
+**Exemple :** J'ai gagné le match hier.
 
-### L'imparfait
+| Sujet      | avoir / être   | 1<sup>er</sup> | 2<sup>e</sup> |
+| ---------- | -------------- | -------------- | ------------- |
+| Je         | ai / suis      | -é             | -i            |
+| Tu         | as / es        | -é             | -i            |
+| Il/Elle/On | a / est        | -é             | -i            |
+| Nous       | avons / sommes | -é             | -i            |
+| Vous       | avez / êtes    | -é             | -i            |
+| Ils/Elles  | ont / sont     | -é             | -i            |
+
+> Avec **être**, le participe passé s'accorde généralement avec le sujet.
+
+- Il est arrivé.
+- Elle est arrivée.
+- Ils sont arrivés.
+- Elles sont arrivées.
+
+---
+
+## L'imparfait
 
 > Sujet + imparfait
+
+**Exemple :** Quand j'étais enfant, je gagnais toujours.
 
 | Sujet      | 1<sup>er</sup> | 2<sup>e</sup> |
 | ---------- | -------------- | ------------- |
@@ -55,122 +98,337 @@ import TensesSlider from "@/components/TensesSlider";
 | Vous       | -iez           | -issiez       |
 | Ils/Elles  | -aient         | -issaient     |
 
-### Le plus-que-parfait
+### Formation
+
+> forme de **nous** au présent − **-ons** + terminaison
+
+- gagner → nous gagnons → gagn-
+- finir → nous finissons → finiss-
+- avoir → nous avons → av-
+- aller → nous allons → all-
+- venir → nous venons → ven-
+- faire → nous faisons → fais-
+- savoir → nous savons → sav-
+
+### Exception
+
+> être → **ét-**
+
+| Sujet      | être    |
+| ---------- | ------- |
+| Je         | étais   |
+| Tu         | étais   |
+| Il/Elle/On | était   |
+| Nous       | étions  |
+| Vous       | étiez   |
+| Ils/Elles  | étaient |
+
+---
+
+## Le plus-que-parfait
 
 > Sujet + avoir / être (imparfait) + participe passé
 
-| Sujet      | avoir / être    | 1<sup>er</sup> | 2<sup>e</sup> |
-| ---------- | --------------- | -------------- | ------------- |
-| Je         | avais/étais     | -é             | -i            |
-| Tu         | avais/étais     | -é             | -i            |
-| Il/Elle/On | avait/était     | -é             | -i            |
-| Nous       | avions/étions   | -é             | -i            |
-| Vous       | aviez/étiez     | -é             | -i            |
-| Ils/Elles  | avaient/étaient | -é             | -i            |
-
-### Le passé récent
-
-> Sujet + venir (présent) de + infinitif
-
-| Sujet      | venir    | 1<sup>er</sup> | 2<sup>e</sup> |
-| ---------- | -------- | -------------- | ------------- |
-| Je         | viens    | -er            | -ir           |
-| Tu         | viens    | -er            | -ir           |
-| Il/Elle/On | vient    | -er            | -ir           |
-| Nous       | venons   | -er            | -ir           |
-| Vous       | venez    | -er            | -ir           |
-| Ils/Elles  | viennent | -er            | -ir           |
-
-## Futur
-
-### Le futur simple
-
-> Sujet + futur simple
-
-| Sujet      | 1<sup>er</sup>/2<sup>e</sup> |
-| ---------- | ---------------------------- |
-| Je         | -ai                          |
-| Tu         | -as                          |
-| Il/Elle/On | -a                           |
-| Nous       | -ons                         |
-| Vous       | -ez                          |
-| Ils/Elles  | -ont                         |
-
-### Le futur proche
-
-> Sujet + aller (présent) + infinitif
-
-| Sujet      | aller  | 1<sup>er</sup> | 2<sup>e</sup> |
-| ---------- | ------ | -------------- | ------------- |
-| Je         | vais   | -er            | -ir           |
-| Tu         | vas    | -er            | -ir           |
-| Il/Elle/On | va     | -er            | -ir           |
-| Nous       | allons | -er            | -ir           |
-| Vous       | allez  | -er            | -ir           |
-| Ils/Elles  | vont   | -er            | -ir           |
-
-### Le futur antérieur
-
-> Sujet + avoir / être (futur simple) + participe passé
-
-| Sujet      | avoir / être  | 1<sup>er</sup> | 2<sup>e</sup> |
-| ---------- | ------------- | -------------- | ------------- |
-| Je         | aurai/serai   | -é             | -i            |
-| Tu         | auras/seras   | -é             | -i            |
-| Il/Elle/On | aura/sera     | -é             | -i            |
-| Nous       | aurons/serons | -é             | -i            |
-| Vous       | aurez/serez   | -é             | -i            |
-| Ils/Elles  | auront/seront | -é             | -i            |
-
-## Conditionnel
-
-### Le conditionnel présent
-
-> Sujet + conditionnel présent
-
-> Si + Sujet + imparfait, Sujet + conditionnel présent
-
-| Sujet      | 1<sup>er</sup>/2<sup>e</sup> |
-| ---------- | ---------------------------- |
-| Je         | -ais                         |
-| Tu         | -ais                         |
-| Il/Elle/On | -ait                         |
-| Nous       | -ions                        |
-| Vous       | -iez                         |
-| Ils/Elles  | -aient                       |
-
-### Le conditionnel passé
-
-> Sujet + avoir / être (conditionnel présent) + participe passé
-
-> Si + Sujet + avoir / être (imparfait) + participe passé, Sujet + avoir / être (conditionnel présent) + participe passé
+**Exemple :** Quand tu es arrivé, j'avais déjà gagné.
 
 | Sujet      | avoir / être      | 1<sup>er</sup> | 2<sup>e</sup> |
 | ---------- | ----------------- | -------------- | ------------- |
-| Je         | aurais/serais     | -é             | -i            |
-| Tu         | aurais/serais     | -é             | -i            |
-| Il/Elle/On | aurait/serait     | -é             | -i            |
-| Nous       | aurions/serions   | -é             | -i            |
-| Vous       | auriez/seriez     | -é             | -i            |
-| Ils/Elles  | auraient/seraient | -é             | -i            |
+| Je         | avais / étais     | -é             | -i            |
+| Tu         | avais / étais     | -é             | -i            |
+| Il/Elle/On | avait / était     | -é             | -i            |
+| Nous       | avions / étions   | -é             | -i            |
+| Vous       | aviez / étiez     | -é             | -i            |
+| Ils/Elles  | avaient / étaient | -é             | -i            |
 
-## Impératif
+> Avec **être**, le participe passé s'accorde généralement avec le sujet.
 
-### L'impératif
+---
 
-> Impératif
+## Le passé récent
 
-| Sujet | 1<sup>er</sup> | 2<sup>e</sup> |
-| ----- | -------------- | ------------- |
-| Tu    | -e             | -is           |
-| Nous  | -ons           | -issons       |
-| Vous  | -ez            | -issez        |
+> Sujet + venir (présent) + de + infinitif
 
-## Le subjonctif
+**Exemple :** Je viens de gagner le match !
 
-### Le subjonctif présent
+| Sujet      | venir + de     | infinitif |
+| ---------- | -------------- | --------- |
+| Je         | viens de       | infinitif |
+| Tu         | viens de       | infinitif |
+| Il/Elle/On | vient de       | infinitif |
+| Nous       | venons de      | infinitif |
+| Vous       | venez de       | infinitif |
+| Ils/Elles  | viennent de    | infinitif |
 
-> que / qu' + Sujet + subjonctif présent
+> **de** devient **d'** devant une voyelle ou un *h* muet.
+
+**Exemple :** Je viens d'oublier son nom.
+
+---
+
+# Futur
+
+## Le futur simple
+
+> Sujet + radical du futur + terminaison
+
+**Exemple :** Je gagnerai le match !
+
+| Sujet      | terminaison |
+| ---------- | ----------- |
+| Je         | -ai         |
+| Tu         | -as         |
+| Il/Elle/On | -a          |
+| Nous       | -ons        |
+| Vous       | -ez         |
+| Ils/Elles  | -ont        |
+
+### Formation
+
+Pour les verbes réguliers :
+
+> infinitif + terminaison
+
+- gagner → je gagnerai
+- finir → je finirai
+
+Pour les verbes en **-re** :
+
+> infinitif sans le **e** final + terminaison
+
+- vendre → je vendrai
+
+### Verbes fréquents
+
+| Verbe  | Radical |
+| ------ | ------- |
+| avoir  | aur-    |
+| être   | ser-    |
+| aller  | ir-     |
+| venir  | viendr- |
+| faire  | fer-    |
+| savoir | saur-   |
+
+- j'aurai
+- je serai
+- j'irai
+- je viendrai
+- je ferai
+- je saurai
+
+> Le radical du futur se termine généralement par **-r**.
+
+---
+
+## Le futur proche
+
+> Sujet + aller (présent) + infinitif
+
+**Exemple :** Je vais gagner le match !
+
+| Sujet      | aller  | infinitif |
+| ---------- | ------ | --------- |
+| Je         | vais   | infinitif |
+| Tu         | vas    | infinitif |
+| Il/Elle/On | va     | infinitif |
+| Nous       | allons | infinitif |
+| Vous       | allez  | infinitif |
+| Ils/Elles  | vont   | infinitif |
+
+---
+
+## Le futur antérieur
+
+> Sujet + avoir / être (futur simple) + participe passé
+
+**Exemple :** Demain à midi, j'aurai gagné.
+
+| Sujet      | avoir / être      | participe passé |
+| ---------- | ----------------- | --------------- |
+| Je         | aurai / serai     | participe passé |
+| Tu         | auras / seras     | participe passé |
+| Il/Elle/On | aura / sera       | participe passé |
+| Nous       | aurons / serons   | participe passé |
+| Vous       | aurez / serez     | participe passé |
+| Ils/Elles  | auront / seront   | participe passé |
+
+> Avec **être**, le participe passé s'accorde généralement avec le sujet.
+
+---
+
+# Conditionnel
+
+## Le conditionnel présent
+
+> Sujet + radical du futur + terminaisons de l'imparfait
+
+**Exemple :** J'habiterais à Bordeaux si je n'habitais pas à Paris.
+
+### Avec « si »
+
+> Si + sujet + imparfait, sujet + conditionnel présent
+
+**Exemple :** Si je jouais, je gagnerais.
+
+| Sujet      | terminaison |
+| ---------- | ----------- |
+| Je         | -ais        |
+| Tu         | -ais        |
+| Il/Elle/On | -ait        |
+| Nous       | -ions       |
+| Vous       | -iez        |
+| Ils/Elles  | -aient      |
+
+### Verbes fréquents
+
+| Verbe  | Radical |
+| ------ | ------- |
+| avoir  | aur-    |
+| être   | ser-    |
+| aller  | ir-     |
+| venir  | viendr- |
+| faire  | fer-    |
+| savoir | saur-   |
+
+- j'aurais
+- je serais
+- j'irais
+- je viendrais
+- je ferais
+- je saurais
+
+> Le **futur simple** et le **conditionnel présent** utilisent les mêmes radicaux.
+
+---
+
+## Le conditionnel passé
+
+> Sujet + avoir / être (conditionnel présent) + participe passé
+
+**Exemple :** J'aurais gagné.
+
+### Avec « si »
+
+> Si + sujet + plus-que-parfait, sujet + conditionnel passé
+
+**Exemple :** Si j'avais joué, j'aurais gagné.
+
+| Sujet      | avoir / être          | participe passé |
+| ---------- | --------------------- | --------------- |
+| Je         | aurais / serais       | participe passé |
+| Tu         | aurais / serais       | participe passé |
+| Il/Elle/On | aurait / serait       | participe passé |
+| Nous       | aurions / serions     | participe passé |
+| Vous       | auriez / seriez       | participe passé |
+| Ils/Elles  | auraient / seraient   | participe passé |
+
+> Avec **être**, le participe passé s'accorde généralement avec le sujet.
+
+### Règle avec « si »
+
+> Si + présent → présent / futur / impératif
+
+> Si + imparfait → conditionnel présent
+
+> Si + plus-que-parfait → conditionnel passé
+
+> On ne met normalement pas **conditionnel** directement après **si**.
+
+---
+
+# Impératif
+
+## L'impératif
+
+> Verbe conjugué sans pronom sujet
+
+Il existe principalement pour :
+
+> **tu / nous / vous**
+
+**Exemple :** Gagne ce match !
+
+| Personne | 1<sup>er</sup> | 2<sup>e</sup> |
+| -------- | -------------- | ------------- |
+| Tu       | -e             | -is           |
+| Nous     | -ons           | -issons       |
+| Vous     | -ez            | -issez        |
+
+### Verbes fréquents
+
+| Verbe  | tu    | nous    | vous    |
+| ------ | ----- | ------- | ------- |
+| avoir  | aie   | ayons   | ayez    |
+| être   | sois  | soyons  | soyez   |
+| aller  | va    | allons  | allez   |
+| venir  | viens | venons  | venez   |
+| faire  | fais  | faisons | faites  |
+| savoir | sache | sachons | sachez  |
+
+### Verbes en -er
+
+À la deuxième personne du singulier, les verbes réguliers en **-er** perdent généralement le **-s**.
+
+> Tu gagnes → Gagne !
+
+> Tu regardes → Regarde !
+
+Mais le **-s** revient devant **y** et **en**.
+
+> Va → Vas-y !
+
+> Mange → Manges-en !
+
+---
+
+# Gérondif
+
+## Le gérondif
+
+> en + participe présent
+
+**Exemple :** En travaillant régulièrement, on progresse plus vite.
+
+### Formation
+
+> forme de **nous** au présent − **-ons** + **-ant**
+
+- nous gagnons → gagnant
+- nous finissons → finissant
+- nous faisons → faisant
+- nous venons → venant
+
+### Exceptions fréquentes
+
+- avoir → **ayant**
+- être → **étant**
+- savoir → **sachant**
+
+**Exemple :** En passant...
+
+---
+
+# Subjonctif
+
+## Le subjonctif présent
+
+> que / qu' + sujet + subjonctif présent
+
+**Exemple :** Il faut que je gagne.
+
+### Déclencheurs fréquents
+
+- Il faut que...
+- Je veux que...
+- Je souhaite que...
+- Je doute que...
+- Je suis heureux que...
+- bien que
+- pour que
+- afin que
+- avant que
+- à condition que
+- sans que
+- quoique
 
 | Sujet      | 1<sup>er</sup> | 2<sup>e</sup> |
 | ---------- | -------------- | ------------- |
@@ -181,37 +439,192 @@ import TensesSlider from "@/components/TensesSlider";
 | Vous       | -iez           | -issiez       |
 | Ils/Elles  | -ent           | -issent       |
 
-### Le subjonctif passé
+### Verbes fréquents
 
-> que / qu' + Sujet + avoir / être (subjonctif présent) + participe passé
+| Sujet      | avoir | être    | aller    | venir     | faire     | savoir    |
+| ---------- | ----- | ------- | -------- | --------- | --------- | --------- |
+| Je         | aie   | sois    | aille    | vienne    | fasse     | sache     |
+| Tu         | aies  | sois    | ailles   | viennes   | fasses    | saches    |
+| Il/Elle/On | ait   | soit    | aille    | vienne    | fasse     | sache     |
+| Nous       | ayons | soyons  | allions  | venions   | fassions  | sachions  |
+| Vous       | ayez  | soyez   | alliez   | veniez    | fassiez   | sachiez   |
+| Ils/Elles  | aient | soient  | aillent  | viennent  | fassent   | sachent   |
 
-| Sujet      | avoir / être | 1<sup>er</sup> | 2<sup>e</sup> |
-| ---------- | ------------ | -------------- | ------------- |
-| Je         | aie/sois     | -é             | -i            |
-| Tu         | aies/sois    | -é             | -i            |
-| Il/Elle/On | ait/soit     | -é             | -i            |
-| Nous       | ayons/soyons | -é             | -i            |
-| Vous       | ayez/soyez   | -é             | -i            |
-| Ils/Elles  | aient/soient | -é             | -i            |
+---
 
-## L'autre temps du français
+## Le subjonctif passé
 
-### Le passé simple
+> que / qu' + sujet + avoir / être (subjonctif présent) + participe passé
 
-> Sujet + Passé Simple
+**Exemple :** Je suis heureux que tu aies gagné.
 
-### Le passé antérieur
+| Sujet      | avoir / être   | participe passé |
+| ---------- | -------------- | --------------- |
+| Je         | aie / sois     | participe passé |
+| Tu         | aies / sois    | participe passé |
+| Il/Elle/On | ait / soit     | participe passé |
+| Nous       | ayons / soyons | participe passé |
+| Vous       | ayez / soyez   | participe passé |
+| Ils/Elles  | aient / soient | participe passé |
+
+> Avec **être**, le participe passé s'accorde généralement avec le sujet.
+
+---
+
+# Temps littéraires
+
+Ces temps apparaissent surtout dans la littérature, les récits historiques et certains textes très soutenus.
+
+---
+
+## Le passé simple
+
+> Sujet + passé simple
+
+Temps narratif utilisé principalement à l'écrit pour des actions terminées.
+
+**Exemple :** Il entra dans la pièce et ferma la porte.
+
+À l'oral, on emploie généralement le **passé composé**.
+
+> Je gagnai → J'ai gagné
+
+### Verbes réguliers
+
+| Sujet      | gagner | finir  | vendre |
+| ---------- | ------ | ------ | ------ |
+| Je         | gagnai | finis  | vendis |
+| Tu         | gagnas | finis  | vendis |
+| Il/Elle/On | gagna  | finit  | vendit |
+| Nous       | gagnâmes | finîmes | vendîmes |
+| Vous       | gagnâtes | finîtes | vendîtes |
+| Ils/Elles  | gagnèrent | finirent | vendirent |
+
+### Verbes très fréquents
+
+| Sujet      | avoir   | être    |
+| ---------- | ------- | ------- |
+| Je         | eus     | fus     |
+| Tu         | eus     | fus     |
+| Il/Elle/On | eut     | fut     |
+| Nous       | eûmes   | fûmes   |
+| Vous       | eûtes   | fûtes   |
+| Ils/Elles  | eurent  | furent  |
+
+> Il fut...
+
+> Ils furent...
+
+> Il eut...
+
+> Ils eurent...
+
+---
+
+## Le passé antérieur
 
 > Sujet + avoir / être (passé simple) + participe passé
 
-### Le subjonctif imparfait
+Il indique généralement une action achevée juste avant une autre action au passé simple.
 
-> que / qu' + Sujet + Subjonctif Imparfait
+**Exemple :** Quand il eut terminé, il partit.
 
-### Le subjonctif plus-que-parfait
+À l'oral ou dans un style moins littéraire, on emploie généralement le **plus-que-parfait**.
 
-> que / qu' + Sujet + avoir / être (subjonctif imparfait) + participe passé
+> J'eus gagné → J'avais gagné
 
-### Le conditionnel passé (2<sup>e</sup> forme)
+| Sujet      | avoir / être  |
+| ---------- | ------------- |
+| Je         | eus / fus     |
+| Tu         | eus / fus     |
+| Il/Elle/On | eut / fut     |
+| Nous       | eûmes / fûmes |
+| Vous       | eûtes / fûtes |
+| Ils/Elles  | eurent / furent |
+
+---
+
+## Le subjonctif imparfait
+
+> que / qu' + sujet + subjonctif imparfait
+
+Forme littéraire aujourd'hui très rare dans la langue courante.
+
+**Exemple :** Il fallait que je gagnasse.
+
+Dans le français courant :
+
+> Il fallait que je gagne.
+
+### Exemple avec « gagner »
+
+| Sujet      | gagner      |
+| ---------- | ----------- |
+| Je         | gagnasse    |
+| Tu         | gagnasses   |
+| Il/Elle/On | gagnât      |
+| Nous       | gagnassions |
+| Vous       | gagnassiez  |
+| Ils/Elles  | gagnassent  |
+
+---
+
+## Le subjonctif plus-que-parfait
+
+> que / qu' + sujet + avoir / être (subjonctif imparfait) + participe passé
+
+Forme littéraire très rare.
+
+**Exemple :** Il aurait fallu que j'eusse gagné.
+
+Dans le français courant, on emploie généralement le **subjonctif passé**.
+
+> que j'eusse gagné → que j'aie gagné
+
+### Auxiliaires
+
+| Sujet      | avoir      | être       |
+| ---------- | ---------- | ---------- |
+| Je         | eusse      | fusse      |
+| Tu         | eusses     | fusses     |
+| Il/Elle/On | eût        | fût        |
+| Nous       | eussions   | fussions   |
+| Vous       | eussiez    | fussiez    |
+| Ils/Elles  | eussent    | fussent    |
+
+---
+
+## Le conditionnel passé — 2<sup>e</sup> forme
 
 > Sujet + avoir / être (subjonctif imparfait) + participe passé
+
+Forme littéraire ancienne du conditionnel passé.
+
+**Exemple :** J'eusse gagné.
+
+Dans le français courant :
+
+> J'aurais gagné.
+
+Sa forme est identique à celle du **subjonctif plus-que-parfait**.
+
+---
+
+# Résumé
+
+| Temps | Structure |
+| ----- | --------- |
+| Présent | sujet + présent |
+| Passé composé | sujet + avoir/être au présent + participe passé |
+| Imparfait | sujet + imparfait |
+| Plus-que-parfait | sujet + avoir/être à l'imparfait + participe passé |
+| Passé récent | sujet + venir au présent + de + infinitif |
+| Futur simple | sujet + radical du futur + terminaison |
+| Futur proche | sujet + aller au présent + infinitif |
+| Futur antérieur | sujet + avoir/être au futur + participe passé |
+| Conditionnel présent | sujet + radical du futur + terminaisons de l'imparfait |
+| Conditionnel passé | sujet + avoir/être au conditionnel + participe passé |
+| Impératif | verbe sans pronom sujet |
+| Gérondif | en + participe présent |
+| Subjonctif présent | que + sujet + subjonctif présent |
+| Subjonctif passé | que + sujet + avoir/être au subjonctif + participe passé |
