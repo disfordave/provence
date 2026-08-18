@@ -37,6 +37,16 @@ const components: MDXComponents = {
     }
     return <Link href={href ?? ""} {...props} />;
   },
+  table: ({ className, ...props }) => (
+    <div className="overflow-auto">
+      <table
+        {...props}
+        className={["w-full overflow-auto", className]
+          .filter(Boolean)
+          .join(" ")}
+      />
+    </div>
+  ),
 };
 
 export function useMDXComponents(): MDXComponents {
