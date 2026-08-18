@@ -8,7 +8,7 @@ import InteractiveSidebarMenu from "@/components/InteractiveSidebarMenu";
 // exports has to be described here.
 export type Article = {
   default: React.ComponentType;
-  metadata?: { title?: string };
+  metadata?: { title?: string; shortTitle?: string; description?: string };
 };
 
 // The MDX modules are bundled at build time, so everything about an article

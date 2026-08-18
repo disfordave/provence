@@ -48,7 +48,7 @@ export default async function CourseList() {
               href={`/cours/${post.slug}`}
               className="transition-colors hover:text-neutral-950 dark:hover:text-white"
             >
-              {post.metadata?.title || post.slug}
+              {post.metadata?.shortTitle || post.metadata?.title || post.slug}
             </Link>
           </li>
         ))}

@@ -1,29 +1,19 @@
-export const metadata = { title: "Bienvenue" };
+export const metadata = {
+  title: "Bienvenue",
+  shortTitle: "Bienvenue",
+  description: "Page de bienvenue",
+};
+import CourseList from "@/components/CourseList";
 
 # Bienvenue
 
-- [Les temps du français](/cours/temps)
+**Bonjour et bienvenue sur la langue française !** Vous trouverez ici des cours et des exercices pour apprendre le français.
 
-Ceci est un petit exemple pour vérifier les fonctionnalités GFM en français.
+**Ce site est en cours de développement.** Vous pouvez accéder au site via les liens ci-dessous.
 
-## Liste de tâches
+- [francais.hsw.is](https://francais.hsw.is)
+- [fr.hsw.is](https://fr.hsw.is) (Le lien court pour un accès plus facile)
 
-- [x] Installer `remark-gfm`
-- [x] Activer le style `prose`
-- [ ] Ajouter d'autres exemples en français
+## Cours
 
-## Tableau
-
-| Élément | État       |
-| ------- | ---------- |
-| MDX     | Fonctionne |
-| GFM     | Fonctionne |
-| Stylage | En place   |
-
-## Texte barré
-
-On peut aussi écrire du texte avec ~~une ancienne version~~ la bonne version.
-
-## Lien automatique
-
-Visitez https://fr.hsw.is pour voir le site.
+<CourseList />
