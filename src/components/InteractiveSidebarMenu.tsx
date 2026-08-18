@@ -26,7 +26,7 @@ export default function InteractiveSidebarMenu({
     <>
       <button
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 z-30 block bg-black/50 lg:hidden ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-30 block lg:hidden ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden="true" // Hides the blank backdrop from screen reader clutter
         tabIndex={-1}
       ></button>
