@@ -46,7 +46,7 @@ export default async function Page({
   return (
     <>
       <div className="p-4 lg:grid lg:grid-cols-4 lg:gap-4">
-        <div className="hidden rounded-2xl border border-neutral-200 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block dark:border-neutral-800">
+        <div className="hidden rounded-2xl border border-neutral-500/25 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block">
           <CourseList />
         </div>
         <article
@@ -55,12 +55,14 @@ export default async function Page({
         >
           <Post />
         </article>
-        <div className="hidden rounded-2xl border border-neutral-200 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block dark:border-neutral-800">
+        <div className="hidden rounded-2xl border border-neutral-500/25 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block">
           <TableOfContents />
         </div>
       </div>
       <InteractiveSidebarMenu>
         <CourseList />
+        <hr className="my-4 border-neutral-500/25" />
+        <TableOfContents />
       </InteractiveSidebarMenu>
     </>
   );
