@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="flex h-full flex-col items-center justify-center gap-2 px-4 sm:gap-4">
+      <div className="flex h-full flex-col items-center justify-center gap-3 px-4 sm:gap-4">
         <h1 className="text-center text-2xl leading-none font-extrabold tracking-tighter text-nowrap uppercase sm:text-4xl">
           Bonjour et <br />
           bienvenue sur <br />
