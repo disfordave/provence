@@ -9,7 +9,6 @@ type Post = {
 };
 
 export async function getPosts(): Promise<Post[]> {
-  "use server";
 
   const contentDir = path.join(process.cwd(), "src", "content");
 
