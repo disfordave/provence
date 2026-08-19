@@ -44,14 +44,14 @@ export default async function Page({
   const Post = article.default;
 
   const sidebarStyleClassName =
-    "hidden border-x border-neutral-100 dark:border-neutral-800 lg:col-span-1 lg:block";
+    "hidden border-neutral-100 dark:border-neutral-800 lg:col-span-1 lg:block";
   const sidebarContentStyleClassName =
     "h-screen overflow-y-auto sticky top-0 px-4 py-8 lg:px-6 xl:px-8 pb-16";
 
   return (
     <>
       <div className="lg:grid lg:grid-cols-4">
-        <div className={sidebarStyleClassName}>
+        <div className={`${sidebarStyleClassName} border-r`}>
           <div className={sidebarContentStyleClassName}>
             <CourseList />
           </div>
@@ -62,7 +62,7 @@ export default async function Page({
         >
           <Post />
         </article>
-        <div className={sidebarStyleClassName}>
+        <div className={`${sidebarStyleClassName} border-l`}>
           <div className={sidebarContentStyleClassName}>
             <TableOfContents />
           </div>
