@@ -7,7 +7,7 @@ export default function TensesSlider() {
   const [evenement, setEvenement] = useState<number>(0);
   return (
     <>
-      <div className="prose-p:m-0 prose-headings:m-0 flex flex-col items-center gap-4 rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-900">
+      <div className="prose-p:m-0 prose-headings:m-0 flex flex-col items-center gap-4 rounded-2xl bg-neutral-100 p-4 dark:bg-black">
         <p className="text-center text-xl font-black">Les Temps</p>
         <div className="flex w-full flex-col gap-1">
           <p className="text-center leading-tight font-bold">
