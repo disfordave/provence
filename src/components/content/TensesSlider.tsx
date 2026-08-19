@@ -58,7 +58,7 @@ export default function TensesSlider() {
   );
 }
 
-function getTense(reference: number, evenement: number): string {
+export function getTense(reference: number, evenement: number): string {
   // R = S: viewpoint is the present
   if (reference === 0) {
     if (evenement === 0) {

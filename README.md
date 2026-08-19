@@ -171,16 +171,16 @@ L'objectif est qu'ils restent suffisamment autonomes pour pouvoir être utilisé
 
 ## Stack technique
 
-| Domaine | Choix | Pourquoi |
-| --- | --- | --- |
-| Framework | Next.js 16, App Router | Rendu serveur par défaut, routes dynamiques et métadonnées |
-| UI | React 19 | Server Components pour le contenu, Client Components pour les interactions |
-| Langage | TypeScript 5 | Typage des composants et des métadonnées des articles |
-| Contenu | MDX, `@next/mdx`, `remark-gfm` | Écrire principalement en Markdown tout en pouvant utiliser React |
-| Titres | `rehype-slug` | Générer automatiquement les ancres des sections |
-| Styles | Tailwind CSS 4, `@tailwindcss/typography` | Mise en forme des articles et de l'interface |
-| Icônes | Heroicons | Icônes simples pour l'interface |
-| Qualité | ESLint 9, Prettier | Analyse et formatage du code |
+| Domaine   | Choix                                     | Pourquoi                                                                   |
+| --------- | ----------------------------------------- | -------------------------------------------------------------------------- |
+| Framework | Next.js 16, App Router                    | Rendu serveur par défaut, routes dynamiques et métadonnées                 |
+| UI        | React 19                                  | Server Components pour le contenu, Client Components pour les interactions |
+| Langage   | TypeScript 5                              | Typage des composants et des métadonnées des articles                      |
+| Contenu   | MDX, `@next/mdx`, `remark-gfm`            | Écrire principalement en Markdown tout en pouvant utiliser React           |
+| Titres    | `rehype-slug`                             | Générer automatiquement les ancres des sections                            |
+| Styles    | Tailwind CSS 4, `@tailwindcss/typography` | Mise en forme des articles et de l'interface                               |
+| Icônes    | Heroicons                                 | Icônes simples pour l'interface                                            |
+| Qualité   | ESLint 9, Prettier                        | Analyse et formatage du code                                               |
 
 ---
 
@@ -209,8 +209,8 @@ Copiez le fichier d'exemple :
 cp .env.example .env
 ```
 
-| Variable | Rôle | Exemple |
-| --- | --- | --- |
+| Variable            | Rôle                                                               | Exemple                   |
+| ------------------- | ------------------------------------------------------------------ | ------------------------- |
 | `METADATA_BASE_URL` | URL de base utilisée pour les métadonnées et les images Open Graph | `https://francais.hsw.is` |
 
 ### Développement
@@ -230,13 +230,13 @@ npm run start
 
 ### Scripts disponibles
 
-| Commande | Rôle |
-| --- | --- |
-| `npm run dev` | Lance le serveur de développement |
-| `npm run build` | Compile le site pour la production |
-| `npm run start` | Lance la version de production |
-| `npm run lint` | Exécute ESLint |
-| `npm run format` | Formate le dépôt avec Prettier |
+| Commande         | Rôle                               |
+| ---------------- | ---------------------------------- |
+| `npm run dev`    | Lance le serveur de développement  |
+| `npm run build`  | Compile le site pour la production |
+| `npm run start`  | Lance la version de production     |
+| `npm run lint`   | Exécute ESLint                     |
+| `npm run format` | Formate le dépôt avec Prettier     |
 
 ---
 
@@ -308,11 +308,11 @@ export const metadata = {
 Le participe passé employé avec **être** s'accorde avec le sujet.
 ```
 
-| Champ | Rôle |
-| --- | --- |
-| `title` | Titre complet du cours |
-| `shortTitle` | Titre court utilisé dans la navigation |
-| `description` | Description courte du contenu |
+| Champ         | Rôle                                   |
+| ------------- | -------------------------------------- |
+| `title`       | Titre complet du cours                 |
+| `shortTitle`  | Titre court utilisé dans la navigation |
+| `description` | Description courte du contenu          |
 
 ### 3. Écrire le cours
 
