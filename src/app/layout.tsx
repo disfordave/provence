@@ -30,9 +30,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="fr"
       className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}
     >
-      <body className="mx-auto flex max-w-345 flex-col">
+      <body className="mx-auto flex max-w-345 flex-col bg-neutral-100 text-neutral-950 dark:bg-black dark:text-neutral-50">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 rounded-4xl bg-white dark:bg-neutral-900">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -43,20 +43,29 @@ export default async function Page({
 
   const Post = article.default;
 
+  const sidebarStyleClassName =
+    "hidden border-x border-neutral-100 dark:border-neutral-800 lg:col-span-1 lg:block";
+  const sidebarContentStyleClassName =
+    "h-screen overflow-y-auto sticky top-0 px-4 py-8 lg:px-6 xl:px-8 pb-16";
+
   return (
     <>
-      <div className="p-4 lg:grid lg:grid-cols-4 lg:gap-4">
-        <div className="hidden rounded-2xl border border-neutral-500/25 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block">
-          <CourseList />
+      <div className="lg:grid lg:grid-cols-4">
+        <div className={sidebarStyleClassName}>
+          <div className={sidebarContentStyleClassName}>
+            <CourseList />
+          </div>
         </div>
         <article
           data-mdx-content
-          className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline prose-table:m-0 prose-table:text-nowrap col-span-2 mx-auto lg:mx-0 lg:max-w-full"
+          className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline prose-table:m-0 prose-table:text-nowrap col-span-2 mx-auto px-4 py-8 lg:mx-0 lg:max-w-full lg:px-6 xl:px-8"
         >
           <Post />
         </article>
-        <div className="hidden rounded-2xl border border-neutral-500/25 p-4 sm:sticky sm:top-4 sm:h-fit sm:max-h-[75vh] sm:overflow-y-auto lg:col-span-1 lg:block">
-          <TableOfContents />
+        <div className={sidebarStyleClassName}>
+          <div className={sidebarContentStyleClassName}>
+            <TableOfContents />
+          </div>
         </div>
       </div>
       <InteractiveSidebarMenu>

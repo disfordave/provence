@@ -36,7 +36,7 @@ export default function InteractiveSidebarMenu({
         aria-hidden={!isOpen}
       >
         {children}
-        <div className="h-16" aria-hidden="true"></div>
+        <div className="h-12" aria-hidden="true"></div>
       </div>
 
       <div className="">
