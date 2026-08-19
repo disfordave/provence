@@ -1,4 +1,4 @@
-import { Article } from "@/app/cours/[...slug]/page";
+import type { Article } from "@/app/cours/[...slug]/page";
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
