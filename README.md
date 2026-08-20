@@ -1,4 +1,4 @@
-# La langue française
+# La langue française (Cloudflare Workers)
 
 > Mes notes de français, transformées petit à petit en site web.
 
