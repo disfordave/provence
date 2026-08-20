@@ -55,7 +55,22 @@ export default function InteractiveSidebarMenu({
       ></button>
       <div
         onClick={(event) => {
-          if ((event.target as HTMLElement).closest("a")) setIsOpen(false);
+          const link = (event.target as HTMLElement).closest("a");
+          if (!link) return;
+          setIsOpen(false);
+
+          const href = link.getAttribute("href") ?? "";
+          const heading = href.startsWith("#")
+            ? document.getElementById(href.slice(1))
+            : null;
+
+          if (heading) {
+            // Headings are not focusable on their own.
+            heading.tabIndex = -1;
+            heading.focus({ preventScroll: true }); // The router does the scrolling
+          } else {
+            toggleButtonRef.current?.focus();
+          }
         }}
         className={`fixed inset-x-4 inset-y-4 z-40 block max-w-96 overflow-auto bg-neutral-50/25 p-6 shadow-xl backdrop-blur-xl lg:hidden dark:bg-neutral-950/25 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"} rounded-2xl border border-neutral-500/25 transition-all duration-300`}
         aria-label="Menu latéral"
