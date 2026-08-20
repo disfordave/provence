@@ -3,29 +3,37 @@
   "main": ".open-next/worker.js",
   "name": "provence",
   "compatibility_date": "2026-08-15",
-  "compatibility_flags": [
-    "global_fetch_strictly_public"
-  ],
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "provence"
-    }
+      "service": "provence",
+    },
   ],
   "r2_buckets": [
     {
       "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "provence-opennext-cache"
-    }
+      "bucket_name": "provence-opennext-cache",
+    },
   ],
   "images": {
-    "binding": "IMAGES"
+    "binding": "IMAGES",
   },
   "observability": {
-    "enabled": true
-  }
+    "enabled": true,
+  },
+  "find_additional_modules": true,
+  "base_dir": ".",
+  "preserve_file_names": true,
+  "rules": [
+    {
+      "type": "Text",
+      "globs": ["src/content/**/*.mdx"],
+      "fallthrough": true,
+    },
+  ],
 }
