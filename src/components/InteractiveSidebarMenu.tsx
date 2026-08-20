@@ -2,12 +2,14 @@
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function InteractiveSidebarMenu({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -36,6 +38,13 @@ export default function InteractiveSidebarMenu({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
+  useEffect(() => {
+    const close = () => {
+      setIsOpen(false);
+    };
+    close();
+  }, [pathname]);
+
   return (
     <>
       <button
@@ -45,6 +54,9 @@ export default function InteractiveSidebarMenu({
         tabIndex={-1}
       ></button>
       <div
+        onClick={(event) => {
+          if ((event.target as HTMLElement).closest("a")) setIsOpen(false);
+        }}
         className={`fixed inset-x-4 inset-y-4 z-40 block max-w-96 overflow-auto bg-neutral-50/25 p-6 shadow-xl backdrop-blur-xl lg:hidden dark:bg-neutral-950/25 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"} rounded-2xl border border-neutral-500/25 transition-all duration-300`}
         aria-label="Menu latéral"
         aria-hidden={!isOpen}

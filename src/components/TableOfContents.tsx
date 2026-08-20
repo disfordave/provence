@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useSyncExternalStore } from "react";
+import { useCallback, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 
 type TocItem = {
   id: string;
@@ -17,7 +18,7 @@ const NO_HEADINGS: TocItem[] = [];
 let snapshot: TocItem[] = NO_HEADINGS;
 let snapshotKey = "";
 
-function getHeadings(): TocItem[] {
+function getHeadings(pathname: string): TocItem[] {
   const article = document.querySelector("[data-mdx-content]");
 
   if (!article) {
@@ -34,9 +35,12 @@ function getHeadings(): TocItem[] {
     }))
     .filter((heading) => heading.id && heading.text.length > 0);
 
-  const key = headings
-    .map((heading) => `${heading.level}:${heading.id}:${heading.text}`)
-    .join("|");
+  const key = [
+    pathname,
+    ...headings.map(
+      (heading) => `${heading.level}:${heading.id}:${heading.text}`,
+    ),
+  ].join("|");
 
   if (key !== snapshotKey) {
     snapshotKey = key;
@@ -48,13 +52,10 @@ function getHeadings(): TocItem[] {
 
 function subscribe(onStoreChange: () => void) {
   const article = document.querySelector("[data-mdx-content]");
-
-  if (!article) {
-    return () => {};
-  }
+  const target = article?.parentElement ?? document.body;
 
   const observer = new MutationObserver(onStoreChange);
-  observer.observe(article, { childList: true, subtree: true });
+  observer.observe(target, { childList: true, subtree: true });
 
   return () => observer.disconnect();
 }
@@ -66,7 +67,9 @@ function getServerSnapshot(): TocItem[] {
 }
 
 export default function TableOfContents() {
-  const items = useSyncExternalStore(subscribe, getHeadings, getServerSnapshot);
+  const pathname = usePathname();
+  const getSnapshot = useCallback(() => getHeadings(pathname), [pathname]);
+  const items = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   if (items.length === 0) {
     return null;
