@@ -13,9 +13,9 @@ export type Article = {
 
 // The MDX modules are bundled at build time, so everything about an article
 // must come from its module rather than from the filesystem.
-async function loadArticle(slug: string): Promise<Article | null> {
+async function loadArticle(slug: string[]): Promise<Article | null> {
   try {
-    return (await import(`@/content/${slug}.mdx`)) as Article;
+    return (await import(`@/content/${slug.join("/")}.mdx`)) as Article;
   } catch (error) {
     if (
       error instanceof Error &&
@@ -32,7 +32,7 @@ async function loadArticle(slug: string): Promise<Article | null> {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
   const article = await loadArticle(slug);
@@ -81,7 +81,7 @@ export async function generateMetadata(
   {
     params,
   }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string[] }>;
   },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
