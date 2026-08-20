@@ -1,11 +1,14 @@
 import Logo from "@/components/Logo";
 import Link from "next/link";
+import ThemeColorButton from "./ThemeColorButton";
 
 export default function Header() {
   return (
     <>
       <header className="flex items-center p-4">
-        <div className="flex-1"></div>
+        <div className="flex-1">
+          <ThemeColorButton />
+        </div>
         <h2 className="">
           <Link href="/" className="select-none">
             <Logo size="xl" />
