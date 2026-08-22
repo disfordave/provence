@@ -16,6 +16,7 @@ Les cours sont écrits en MDX, donc ils restent proches de simples fichiers Mark
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)
 ![Licence](https://img.shields.io/badge/Licence-AGPL--3.0--or--later-blue)
+[![CI](https://github.com/disfordave/provence/actions/workflows/ci.yml/badge.svg)](https://github.com/disfordave/provence/actions/workflows/ci.yml)
 
 ---
 
