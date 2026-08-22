@@ -16,7 +16,7 @@ export default function Header() {
           </Link>
         </h2>
         <div className="flex flex-1 justify-end">
-         <SearchBar />
+          <SearchBar />
         </div>
       </header>
     </>
