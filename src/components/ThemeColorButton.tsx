@@ -6,14 +6,7 @@ import {
   SunIcon,
 } from "@heroicons/react/20/solid";
 
-import dynamic from "next/dynamic";
-
-const ThemeToggle = dynamic(
-  () => import("themeflip").then((mod) => mod.ThemeToggle),
-  {
-    ssr: false,
-  },
-);
+import { ThemeToggle } from "themeflip";
 
 export default function ThemeButton() {
   return (
