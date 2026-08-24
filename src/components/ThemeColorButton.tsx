@@ -31,7 +31,7 @@ export default function ThemeButton() {
         activeButtonClassName="
     text-white dark:text-neutral-950
   "
-        auto={{
+        system={{
           label: "Auto",
           icon: <ComputerDesktopIcon className="size-5" />,
         }}
