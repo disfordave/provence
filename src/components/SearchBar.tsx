@@ -11,6 +11,7 @@ export default function SearchBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [index, setIndex] = useState<SearchEntry[] | null>(null);
+  const [error, setError] = useState<unknown>();
   const [activeIndex, setActiveIndex] = useState(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -39,9 +40,13 @@ export default function SearchBar() {
   useEffect(() => {
     if (!isOpen || index) return;
     let cancelled = false;
-    getSearchIndex().then((entries) => {
-      if (!cancelled) setIndex(entries);
-    });
+    getSearchIndex()
+      .then((entries) => {
+        if (!cancelled) setIndex(entries);
+      })
+      .catch((error) => {
+        if (!cancelled) setError(error.message || "Recherche indisponible");
+      });
     return () => {
       cancelled = true;
     };
@@ -148,7 +153,13 @@ export default function SearchBar() {
                 className="max-h-96 overflow-auto rounded-2xl border-2 border-neutral-500/20 bg-white p-4 shadow-2xl dark:bg-neutral-900"
               >
                 {results.length === 0 ? (
-                  <p>{index ? "Aucun résultat" : "Chargement..."}</p>
+                  <p>
+                    {error
+                      ? `${error}`
+                      : index
+                        ? "Aucun résultat"
+                        : "Chargement..."}
+                  </p>
                 ) : (
                   <ul
                     id="search-results"
