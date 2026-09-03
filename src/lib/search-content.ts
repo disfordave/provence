@@ -103,7 +103,11 @@ export async function buildSearchIndex(): Promise<SearchEntry[]> {
         const source = await readFile(path.join(CONTENT_DIR, file), "utf8");
         const { metadata } = (await import(`@/content/${slug}.mdx`)) as Article;
 
-        return parseArticle(slug, metadata?.title ?? slug, source);
+        return parseArticle(
+          slug,
+          metadata?.shortTitle ?? metadata?.title ?? slug,
+          source,
+        );
       }),
   );
 
