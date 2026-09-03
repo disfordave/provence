@@ -13,6 +13,7 @@ export default function SearchBar() {
   const [index, setIndex] = useState<SearchEntry[] | null>(null);
   const [error, setError] = useState<unknown>();
   const [activeIndex, setActiveIndex] = useState(0);
+  const listRef = useRef<HTMLUListElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -82,6 +83,12 @@ export default function SearchBar() {
     setActiveIndex(0);
   };
 
+  useEffect(() => {
+    listRef.current
+      ?.querySelector(`#search-result-${activeIndex}`)
+      ?.scrollIntoView({ block: "nearest" });
+  }, [activeIndex, results]);
+
   const goTo = (result: SearchResult | undefined) => {
     if (!result) return;
     close();
@@ -118,6 +125,7 @@ export default function SearchBar() {
                 onKeyDown={(event) => {
                   if (event.key === "ArrowDown") {
                     event.preventDefault();
+                    if (results.length === 0) return;
                     setActiveIndex((i) => Math.min(i + 1, results.length - 1));
                   } else if (event.key === "ArrowUp") {
                     event.preventDefault();
@@ -165,6 +173,7 @@ export default function SearchBar() {
                     id="search-results"
                     role="listbox"
                     className="flex flex-col gap-2"
+                    ref={listRef}
                   >
                     {results.map((result, position) => (
                       <li
