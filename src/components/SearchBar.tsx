@@ -86,6 +86,10 @@ export default function SearchBar() {
   return (
     <>
       <div
+        inert={!isOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Recherche"
         className={`fixed inset-0 z-100 backdrop-blur-md ${isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} flex items-center justify-center transition-opacity`}
       >
         <div className="relative flex h-full w-full justify-center overflow-auto">
