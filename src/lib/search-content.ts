@@ -14,7 +14,7 @@ function plain(mdx: string): string {
   return mdx
     .replace(/^\s*[-*+]\s+/gm, "")
     .replace(/-{3,}/g, " ")
-    .replace(/<[^>]*>/g, " ")
+    .replace(/<[^>]*>/g, "")
     .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
     .replace(/[*_`>|#]/g, " ")
     .replace(/\s+/g, " ")
@@ -75,7 +75,7 @@ export function parseArticle(
 
     // A heading closes every section deeper than itself, so the trail is
     // truncated to this level before the new heading joins it.
-    trail.length = level - 2;
+    trail.length = Math.min(trail.length, level - 2);
     trail.push(heading);
 
     flush();

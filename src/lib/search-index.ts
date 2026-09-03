@@ -8,6 +8,9 @@ import type { SearchEntry } from "@/lib/search";
 let cached: Promise<SearchEntry[]> | null = null;
 
 export async function getSearchIndex(): Promise<SearchEntry[]> {
-  cached ??= buildSearchIndex();
+  cached ??= buildSearchIndex().catch((error) => {
+    cached = null;
+    throw error;
+  });
   return cached;
 }
