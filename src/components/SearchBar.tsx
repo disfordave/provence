@@ -161,7 +161,7 @@ export default function SearchBar() {
                 className="max-h-96 overflow-auto rounded-2xl border-2 border-neutral-500/20 bg-white shadow-2xl dark:bg-neutral-900"
               >
                 {results.length === 0 ? (
-                  <p>
+                  <p className="p-4">
                     {error
                       ? `${error}`
                       : index
