@@ -106,7 +106,7 @@ export default function SearchBar() {
       >
         <div className="relative flex h-full w-full justify-center overflow-auto">
           <div className={`absolute z-101 h-full w-full`} onClick={close}></div>
-          <div className="absolute top-[20vh] z-102 flex w-full max-w-xl flex-col gap-2 p-4">
+          <div className="absolute top-2 z-102 flex w-full max-w-xl flex-col gap-2 p-4 sm:top-[10vh] md:top-[20vh]">
             <form
               className="flex items-center gap-2"
               onSubmit={(e) => {
@@ -158,7 +158,7 @@ export default function SearchBar() {
                   if (!link) return;
                   close();
                 }}
-                className="max-h-96 overflow-auto rounded-2xl border-2 border-neutral-500/20 bg-white p-4 shadow-2xl dark:bg-neutral-900"
+                className="max-h-96 overflow-auto rounded-2xl border-2 border-neutral-500/20 bg-white shadow-2xl dark:bg-neutral-900"
               >
                 {results.length === 0 ? (
                   <p>
@@ -172,7 +172,7 @@ export default function SearchBar() {
                   <ul
                     id="search-results"
                     role="listbox"
-                    className="flex flex-col gap-2"
+                    className="flex flex-col gap-0"
                     ref={listRef}
                   >
                     {results.map((result, position) => (
@@ -182,7 +182,7 @@ export default function SearchBar() {
                         role="option"
                         aria-selected={position === activeIndex}
                         onMouseEnter={() => setActiveIndex(position)}
-                        className={`cursor-pointer rounded-lg p-3 transition-colors ${position === activeIndex ? "bg-neutral-100 dark:bg-neutral-800" : ""}`}
+                        className={`cursor-pointer p-3 transition-colors ${position === activeIndex ? "bg-neutral-100 dark:bg-neutral-800" : ""}`}
                       >
                         <Link
                           href={result.href}
