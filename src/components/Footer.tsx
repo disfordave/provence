@@ -2,7 +2,7 @@ export default function Footer() {
   const startYear = 2026;
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="flex flex-col items-center justify-center gap-2 p-4 text-center text-base text-zinc-600 dark:text-zinc-400">
+    <footer className="flex flex-col items-center justify-center gap-2 p-4 pb-24 text-center text-base text-zinc-600 lg:pb-4 dark:text-zinc-400">
       <p>
         &copy; {startYear}
         {currentYear !== startYear ? `-${currentYear}` : ""}{" "}
