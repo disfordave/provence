@@ -3,13 +3,14 @@ import { readdir } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
 import { Fragment } from "react/jsx-runtime";
+import CourseListItem from "./CourseListItem";
 
-type Post = {
+export type Post = {
   slug: string;
   metadata: Article["metadata"];
 };
 
-type Category = {
+export type Category = {
   isRoot: boolean;
   slug: string;
   posts: Post[];
@@ -83,37 +84,23 @@ export default async function CourseList() {
 
   return (
     <nav aria-label="Cours" className="rounded-2xl">
-      <p className="mb-2 text-base font-semibold">Cours</p>
+      <p className="mb-2 text-base font-bold">Cours</p>
       <ul className="space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
         {cats.map((cat) => (
           <Fragment key={cat.slug}>
             {cat.isRoot ? (
               cat.posts.map((post) => (
                 <li key={post.slug}>
-                  <Link
-                    href={`/cours/${post.slug}`}
-                    className="transition-colors hover:text-neutral-950 dark:hover:text-white"
-                  >
-                    {post.metadata?.shortTitle ||
-                      post.metadata?.title ||
-                      post.slug}
-                  </Link>
+                  <CourseListItem post={post} cat={cat} />
                 </li>
               ))
             ) : (
               <li key={cat.slug}>
-                <p className="mb-2 font-semibold uppercase">{cat.slug}</p>
+                <p className="mb-2 font-bold uppercase">{cat.slug}</p>
                 <ul>
                   {cat.posts.map((post) => (
                     <li key={post.slug} className="mb-2">
-                      <Link
-                        href={`/cours/${cat.slug}/${post.slug}`}
-                        className="transition-colors hover:text-neutral-950 dark:hover:text-white"
-                      >
-                        {post.metadata?.shortTitle ||
-                          post.metadata?.title ||
-                          post.slug}
-                      </Link>
+                      <CourseListItem post={post} cat={cat} />
                     </li>
                   ))}
                 </ul>

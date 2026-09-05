@@ -77,7 +77,7 @@ export default function TableOfContents() {
 
   return (
     <nav aria-label="Sommaire" className="rounded-2xl">
-      <p className="mb-2 text-base font-semibold">Sommaire</p>
+      <p className="mb-2 text-base font-bold">Sommaire</p>
       <ol className="space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
         {items.map((item) => (
           <li
