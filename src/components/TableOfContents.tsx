@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { usePathname } from "next/navigation";
 
 type TocItem = {
@@ -107,6 +113,13 @@ export default function TableOfContents() {
   const getSnapshot = useCallback(() => getHeadings(pathname), [pathname]);
   const items = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const activeId = useActiveId(items);
+  const listRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    listRef.current
+      ?.querySelector(`#toc-item-${activeId}`)
+      ?.scrollIntoView({ block: "nearest" });
+  }, [activeId, items]);
 
   if (items.length === 0) {
     return null;
@@ -115,13 +128,17 @@ export default function TableOfContents() {
   return (
     <nav aria-label="Sommaire" className="rounded-2xl">
       <p className="mb-2 text-base font-bold">Sommaire</p>
-      <ol className="space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+      <ol
+        className="space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300"
+        ref={listRef}
+      >
         {items.map((item) => {
           const isActive = item.id === activeId;
 
           return (
             <li
               key={item.id}
+              id={`toc-item-${item.id}`}
               className={
                 item.level === 3 ? "ml-4" : item.level === 4 ? "ml-8" : ""
               }
