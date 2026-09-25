@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
+import { getCategories } from "@/components/CourseList";
 
 // `@types/mdx` only declares the default export, so the metadata each article
 // exports has to be described here.
@@ -24,6 +25,18 @@ async function loadArticle(slug: string[]): Promise<Article | null> {
 
     throw error;
   }
+}
+
+export const dynamicParams = false;
+
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
+  const cats = await getCategories();
+
+  return cats.flatMap((cat) =>
+    cat.posts.map((post) => ({
+      slug: cat.isRoot ? [post.slug] : [cat.slug, post.slug],
+    })),
+  );
 }
 
 export default async function Page({
