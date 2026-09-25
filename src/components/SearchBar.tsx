@@ -4,7 +4,6 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useRef } from "react";
-import { getSearchIndex } from "@/lib/search-index";
 import { search, type SearchEntry, type SearchResult } from "@/lib/search";
 
 export default function SearchBar() {
@@ -41,7 +40,11 @@ export default function SearchBar() {
   useEffect(() => {
     if (!isOpen || index) return;
     let cancelled = false;
-    getSearchIndex()
+    fetch("/search-index.json")
+      .then((response) => {
+        if (!response.ok) throw new Error("Recherche indisponible");
+        return response.json() as Promise<SearchEntry[]>;
+      })
       .then((entries) => {
         if (!cancelled) setIndex(entries);
       })

@@ -88,7 +88,7 @@ export function parseArticle(
 }
 
 // The MDX is compiled into the bundle, so the searchable text has to be read
-// from the source files. `outputFileTracingIncludes` ships them with the build.
+// from the source files, which only happens at build time.
 export async function buildSearchIndex(): Promise<SearchEntry[]> {
   const files = await readdir(CONTENT_DIR, { recursive: true });
 

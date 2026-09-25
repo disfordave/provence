@@ -109,6 +109,20 @@ Par exemple, un cours ou une liste de cours n'a pas besoin de devenir un Client 
 
 À l'inverse, le curseur des temps et le menu mobile sont interactifs et vivent naturellement côté client.
 
+### Un site entièrement statique
+
+Mes notes ne changent que lorsque je les modifie, donc je n'ai pas besoin d'un serveur pour les afficher.
+
+Le site est exporté en HTML statique avec `output: "export"`. Au moment du build, Next.js rend chaque cours une seule fois et écrit le résultat dans le dossier `out/`.
+
+Les Server Components s'exécutent donc pendant le build, et non à chaque visite. La liste des cours, les métadonnées et le contenu des articles sont déjà présents dans le HTML généré.
+
+Les routes des cours sont produites par `generateStaticParams` à partir des fichiers de `src/content`. Une adresse qui ne correspond à aucun cours renvoie simplement la page 404.
+
+La recherche suit le même principe : son index est construit pendant le build dans un fichier `search-index.json`, que le navigateur ne télécharge qu'à la première ouverture de la recherche.
+
+Le résultat peut être hébergé sur n'importe quel serveur de fichiers statiques. En contrepartie, un cours ajouté ou modifié n'apparaît en ligne qu'après un nouveau build.
+
 ### Les cours sont découverts depuis le contenu
 
 Les cours vivent dans :
@@ -166,6 +180,7 @@ L'objectif est qu'ils restent suffisamment autonomes pour pouvoir être utilisé
 - **Accessibilité** : éléments HTML natifs, navigation au clavier et attributs `aria` lorsque nécessaire.
 - **Thème clair et sombre** : basé sur les préférences du système.
 - **Métadonnées par cours** : titre et informations Open Graph générés pour les pages.
+- **Site statique** : chaque page est générée en HTML au moment du build et peut être hébergée sans serveur Node.js.
 - **Manifeste d'application Web** : métadonnées utilisées par le navigateur pour l'intégration et l'installation du site.
 
 ---
@@ -174,7 +189,7 @@ L'objectif est qu'ils restent suffisamment autonomes pour pouvoir être utilisé
 
 | Domaine   | Choix                                     | Pourquoi                                                                   |
 | --------- | ----------------------------------------- | -------------------------------------------------------------------------- |
-| Framework | Next.js 16, App Router                    | Rendu serveur par défaut, routes dynamiques et métadonnées                 |
+| Framework | Next.js 16, App Router, export statique   | Pages générées au build, sans serveur à faire tourner en production        |
 | UI        | React 19                                  | Server Components pour le contenu, Client Components pour les interactions |
 | Langage   | TypeScript 5                              | Typage des composants et des métadonnées des articles                      |
 | Contenu   | MDX, `@next/mdx`, `remark-gfm`            | Écrire principalement en Markdown tout en pouvant utiliser React           |
@@ -210,9 +225,9 @@ Copiez le fichier d'exemple :
 cp .env.example .env
 ```
 
-| Variable            | Rôle                                                               | Exemple                   |
-| ------------------- | ------------------------------------------------------------------ | ------------------------- |
-| `METADATA_BASE_URL` | URL de base utilisée pour les métadonnées et les images Open Graph | `https://francais.hsw.is` |
+| Variable            | Rôle                                                                        | Exemple                   |
+| ------------------- | --------------------------------------------------------------------------- | ------------------------- |
+| `METADATA_BASE_URL` | URL de base utilisée au build pour les métadonnées et les images Open Graph | `https://francais.hsw.is` |
 
 ### Développement
 
@@ -226,18 +241,26 @@ Puis ouvrez [http://localhost:3000](http://localhost:3000).
 
 ```bash
 npm run build
-npm run start
 ```
+
+Le site est exporté en fichiers statiques dans le dossier `out/`. N'importe quel serveur de fichiers statiques suffit pour le tester localement, par exemple :
+
+```bash
+npx serve out
+```
+
+Il n'y a pas de serveur Next.js en production, donc `next start` n'est pas utilisé.
+
+Les pages sont écrites sous la forme `cours/grammaire/temps.html`. L'hébergeur doit donc servir `/cours/grammaire/temps` à partir de ce fichier, ce que la plupart des hébergeurs statiques font par défaut.
 
 ### Scripts disponibles
 
-| Commande         | Rôle                               |
-| ---------------- | ---------------------------------- |
-| `npm run dev`    | Lance le serveur de développement  |
-| `npm run build`  | Compile le site pour la production |
-| `npm run start`  | Lance la version de production     |
-| `npm run lint`   | Exécute ESLint                     |
-| `npm run format` | Formate le dépôt avec Prettier     |
+| Commande         | Rôle                                            |
+| ---------------- | ----------------------------------------------- |
+| `npm run dev`    | Lance le serveur de développement               |
+| `npm run build`  | Exporte le site statique dans le dossier `out/` |
+| `npm run lint`   | Exécute ESLint                                  |
+| `npm run format` | Formate le dépôt avec Prettier                  |
 
 ---
 
@@ -246,7 +269,10 @@ npm run start
 ```text
 src/
 ├── app/
-│   ├── cours/[slug]/page.tsx
+│   ├── cours/
+│   │   ├── layout.tsx
+│   │   └── [...slug]/page.tsx
+│   ├── search-index.json/route.ts
 │   ├── layout.tsx
 │   ├── page.tsx
 │   ├── globals.css
@@ -256,6 +282,7 @@ src/
 │   ├── CourseList.tsx
 │   ├── TableOfContents.tsx
 │   ├── InteractiveSidebarMenu.tsx
+│   ├── SearchBar.tsx
 │   ├── Header.tsx
 │   ├── Footer.tsx
 │   ├── Logo.tsx
@@ -264,7 +291,12 @@ src/
 │
 ├── content/
 │   ├── bienvenue.mdx
-│   └── temps.mdx
+│   ├── grammaire/
+│   └── vocabulaire/
+│
+├── lib/
+│   ├── search.ts
+│   └── search-content.ts
 │
 └── mdx-components.tsx
 ```
@@ -294,6 +326,8 @@ Le nom du fichier devient son slug :
 ```text
 /cours/accords
 ```
+
+En développement, le cours apparaît immédiatement. En production, sa page est générée lors du prochain `npm run build`.
 
 ### 2. Ajouter les métadonnées
 
