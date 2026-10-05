@@ -57,7 +57,7 @@ export default async function Page({
     <>
       <article
         data-mdx-content
-        className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline prose-table:m-0 prose-table:text-nowrap col-span-2 mx-auto border-neutral-100 p-4 lg:mx-0 lg:max-w-full lg:border-x sm:p-6 dark:border-neutral-800"
+        className="prose prose-neutral dark:prose-invert prose-blockquote:font-medium prose-blockquote:not-italic prose-blockquote:prose-p:before:content-none prose-blockquote:prose-p:after:content-none prose-a:hover:no-underline prose-table:m-0 prose-table:text-nowrap col-span-2 mx-auto border-neutral-100 p-4 sm:p-6 lg:mx-0 lg:max-w-full lg:border-x dark:border-neutral-800"
       >
         <Post />
       </article>
