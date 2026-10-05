@@ -13,10 +13,10 @@ export default function ThemeButton() {
     <>
       <ThemeToggle
         addDarkClass
-        className="relative flex h-full max-w-fit items-center justify-center rounded-full border-2 border-transparent bg-white dark:bg-neutral-900"
+        className="-full relative flex h-full max-w-fit items-center justify-center border-0 border-transparent bg-white dark:bg-neutral-900"
         indicatorClassName="
     absolute top-0 left-0 z-0 h-full w-1/3
-    rounded-full bg-neutral-900
+    bg-neutral-900
     transition-transform duration-300
     dark:bg-white
     data-[theme=auto]:translate-x-0
@@ -25,7 +25,7 @@ export default function ThemeButton() {
   "
         buttonClassName="
     relative z-10 flex aspect-square size-full
-    items-center justify-center rounded-full p-1.5
+    items-center justify-center p-1.5
     transition-colors duration-300
   "
         activeButtonClassName="

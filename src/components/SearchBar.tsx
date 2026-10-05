@@ -143,13 +143,13 @@ export default function SearchBar() {
                     ? `search-result-${activeIndex}`
                     : undefined
                 }
-                className="w-full rounded-full border-2 border-neutral-500/20 bg-white px-4 py-2 shadow-2xl transition-colors focus:border-black focus:outline-0 dark:bg-neutral-900 dark:focus:border-white"
+                className="-full w-full border-2 border-transparent bg-white px-4 py-2 shadow-2xl transition-colors focus:border-black focus:outline-0 dark:bg-neutral-900 dark:focus:border-white"
                 placeholder="Rechercher..."
                 ref={searchInputRef}
               />
               <button
                 type="submit"
-                className="rounded-full border border-transparent bg-neutral-950 p-2.5 text-nowrap text-white shadow-2xl transition-colors hover:bg-neutral-800 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
+                className="-full border-2 border-transparent bg-neutral-950 p-2.5 text-nowrap text-white shadow-2xl transition-colors hover:bg-neutral-800 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
               >
                 <MagnifyingGlassIcon className="size-5" />
               </button>
@@ -161,7 +161,7 @@ export default function SearchBar() {
                   if (!link) return;
                   close();
                 }}
-                className="max-h-[50vh] overflow-auto rounded-2xl border-2 border-neutral-500/20 bg-white shadow-2xl dark:bg-neutral-900"
+                className="max-h-[50vh] overflow-auto bg-white shadow-2xl dark:bg-neutral-900"
               >
                 {results.length === 0 ? (
                   <p className="p-4">
@@ -185,7 +185,7 @@ export default function SearchBar() {
                         role="option"
                         aria-selected={position === activeIndex}
                         onMouseEnter={() => setActiveIndex(position)}
-                        className={`cursor-pointer p-3 transition-colors ${position === activeIndex ? "bg-neutral-100 dark:bg-neutral-800" : ""}`}
+                        className={`cursor-pointer p-3 transition-colors ${position === activeIndex ? "bg-neutral-200 dark:bg-neutral-700" : ""}`}
                       >
                         <Link
                           href={result.href}
@@ -216,10 +216,10 @@ export default function SearchBar() {
         </div>
       </div>
       <button onClick={() => setIsOpen(true)} className="flex gap-2">
-        <div className="text hidden w-48 rounded-full border-2 border-transparent bg-white px-2 py-0.75 text-left transition-colors focus:border-black focus:outline-0 lg:block dark:bg-neutral-900 dark:focus:border-white">
+        <div className="text hidden w-48 border-0 border-transparent bg-white px-2 py-0.75 text-left transition-colors focus:border-black focus:outline-0 lg:block dark:bg-neutral-900 dark:focus:border-white">
           <span className="opacity-60">Rechercher...</span>
         </div>
-        <div className="rounded-full border border-transparent bg-neutral-950 p-1.5 text-nowrap text-white transition-colors hover:bg-neutral-800 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200">
+        <div className="-full border-0 border-transparent bg-neutral-950 p-1.5 text-nowrap text-white transition-colors hover:bg-neutral-800 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200">
           <MagnifyingGlassIcon className="size-5" />
         </div>
       </button>
