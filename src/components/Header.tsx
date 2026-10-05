@@ -12,7 +12,12 @@ export default function Header() {
         </div>
         <h2 className="">
           <Link href="/" className="select-none">
-            <Logo size="xl" />
+            <div className="hidden sm:block">
+              <Logo size="xl" />
+            </div>
+            <div className="block sm:hidden">
+              <Logo size="xl" showLogoOnly />
+            </div>
           </Link>
         </h2>
         <div className="flex flex-1 justify-end">
