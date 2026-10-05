@@ -4,7 +4,7 @@ import TableOfContents from "@/components/TableOfContents";
 
 const sidebarStyleClassName = "hidden lg:col-span-1 lg:block";
 const sidebarContentStyleClassName =
-  "h-screen overflow-y-auto sticky top-0 px-4 py-8 lg:px-6 xl:px-8 pb-8";
+  "h-screen overflow-y-auto sticky top-0 p-4 lg:p-6";
 
 export default function CourseLayout({ children }: LayoutProps<"/cours">) {
   return (

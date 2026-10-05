@@ -72,7 +72,7 @@ export default function InteractiveSidebarMenu({
             toggleButtonRef.current?.focus();
           }
         }}
-        className={`fixed inset-x-4 inset-y-4 z-40 block max-w-96 overflow-auto bg-neutral-50 p-6 shadow-2xl lg:hidden dark:bg-neutral-950 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"} border-0 border-neutral-500/25 transition-all duration-300`}
+        className={`fixed inset-x-4 inset-y-4 z-40 block max-w-96 overflow-auto bg-neutral-50 p-6 shadow-2xl lg:hidden dark:bg-neutral-900 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"} border border-neutral-500/10 transition-all duration-300`}
         aria-label="Menu latéral"
         aria-hidden={!isOpen}
         inert={!isOpen}
