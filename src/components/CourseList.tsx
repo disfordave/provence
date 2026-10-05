@@ -82,7 +82,7 @@ export default async function CourseList() {
   const cats = await getCategories();
 
   return (
-    <nav aria-label="Cours" className="-2xl">
+    <nav aria-label="Cours" className="">
       <p className="mb-2 text-base font-bold">Cours</p>
       <ul className="space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
         {cats.map((cat) => (
