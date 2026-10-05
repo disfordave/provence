@@ -49,7 +49,7 @@ export default function InteractiveSidebarMenu({
     <>
       <button
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 z-30 block lg:hidden ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-30 block lg:hidden ${isOpen ? "pointer-events-auto backdrop-blur-md" : "pointer-events-none"}`}
         aria-hidden="true" // Hides the blank backdrop from screen reader clutter
         tabIndex={-1}
       ></button>
@@ -85,7 +85,7 @@ export default function InteractiveSidebarMenu({
         <button
           ref={toggleButtonRef}
           onClick={() => setIsOpen(!isOpen)}
-          className="-full fixed right-8 bottom-8 z-50 block bg-neutral-950 p-3 text-nowrap text-white shadow-2xl transition-colors hover:bg-neutral-800 lg:hidden dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
+          className="fixed right-8 bottom-8 z-50 block bg-neutral-950 p-3 text-nowrap text-white shadow-2xl transition-colors hover:bg-neutral-800 lg:hidden dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
           aria-expanded={isOpen}
           aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
