@@ -11,7 +11,7 @@ export default function Home() {
         </h1>
         <Link
           href="/cours/bienvenue"
-          className="rounded-full bg-neutral-950 px-4 py-2 text-sm text-nowrap text-white transition-colors hover:bg-neutral-800 sm:text-base dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
+          className="-full bg-neutral-950 px-4 py-2 text-sm text-nowrap text-white transition-colors hover:bg-neutral-800 sm:text-base dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
         >
           Apprendre le français
         </Link>

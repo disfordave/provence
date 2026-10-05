@@ -40,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="mx-auto flex max-w-345 flex-col bg-neutral-100 text-neutral-950 dark:bg-black dark:text-neutral-50">
         <Header />
-        <main className="flex-1 rounded-4xl bg-white dark:bg-neutral-900">
+        <main className="-4xl flex-1 bg-white dark:bg-neutral-900">
           {children}
         </main>
         <Footer />
