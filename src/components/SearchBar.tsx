@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useRef } from "react";
 import { search, type SearchEntry, type SearchResult } from "@/lib/search";
+import { useExclusiveOverlay } from "@/lib/overlays";
 import { isSingleKeyShortcut } from "@/lib/shortcuts";
 
 export default function SearchBar() {
@@ -16,6 +17,7 @@ export default function SearchBar() {
   const listRef = useRef<HTMLUListElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  useExclusiveOverlay("search", isOpen, setIsOpen);
 
   const results = useMemo(
     () => (index ? search(index, searchText) : []),

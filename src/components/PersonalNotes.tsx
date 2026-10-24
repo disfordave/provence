@@ -3,6 +3,7 @@
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { readNote, subscribeToNote, writeNote } from "@/lib/notes";
+import { useExclusiveOverlay } from "@/lib/overlays";
 import { isSingleKeyShortcut } from "@/lib/shortcuts";
 
 // The server has no storage, and the panel starts closed anyway.
@@ -19,6 +20,7 @@ export default function PersonalNotes() {
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef<HTMLElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useExclusiveOverlay("notes", isOpen, setIsOpen);
 
   useEffect(() => {
     const panel = panelRef.current;

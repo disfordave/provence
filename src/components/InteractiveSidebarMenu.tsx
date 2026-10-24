@@ -3,6 +3,7 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useExclusiveOverlay } from "@/lib/overlays";
 import { isSingleKeyShortcut } from "@/lib/shortcuts";
 
 export default function InteractiveSidebarMenu({
@@ -13,6 +14,7 @@ export default function InteractiveSidebarMenu({
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  useExclusiveOverlay("menu", isOpen, setIsOpen);
 
   // Toggle background scrolling
   useEffect(() => {
