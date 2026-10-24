@@ -291,6 +291,8 @@ src/
 │
 ├── content/
 │   ├── bienvenue.mdx
+│   ├── ressources.mdx
+│   ├── anglophones/
 │   ├── grammaire/
 │   └── vocabulaire/
 │
