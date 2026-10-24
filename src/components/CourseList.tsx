@@ -1,5 +1,5 @@
 import type { Article } from "@/app/cours/[...slug]/page";
-import { readdir } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { Fragment } from "react/jsx-runtime";
 import CourseListItem from "./CourseListItem";
@@ -12,8 +12,12 @@ export type Post = {
 export type Category = {
   isRoot: boolean;
   slug: string;
+  title?: string;
+  position?: number;
   posts: Post[];
 };
+
+type CategoryMetadata = Pick<Category, "title" | "position">;
 
 const joinedPath = [process.cwd(), "src", "content"];
 
@@ -47,6 +51,26 @@ export async function getPosts(categorySlug?: string): Promise<Post[]> {
   return posts;
 }
 
+// A folder can describe itself in a `category.json`: a readable title, so its
+// slug stays short in the URL, and its position in the navigation.
+async function getCategoryMetadata(
+  categorySlug: string,
+): Promise<CategoryMetadata> {
+  try {
+    const file = await readFile(
+      path.join(...joinedPath, categorySlug, "category.json"),
+      "utf8",
+    );
+    return JSON.parse(file) as CategoryMetadata;
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+      return {};
+    }
+
+    throw error;
+  }
+}
+
 export async function getCategories(): Promise<Category[]> {
   const contentDir = path.join(...joinedPath);
 
@@ -67,13 +91,25 @@ export async function getCategories(): Promise<Category[]> {
   const categoryData = await Promise.all(
     categories.map(async (cat) => {
       const posts = await getPosts(cat.name);
+      const { title, position } = await getCategoryMetadata(cat.name);
       return {
         isRoot: false,
         slug: cat.name,
+        title,
+        position,
         posts: posts,
       };
     }),
   );
+
+  // Folders without a position come after the others, in alphabetical order.
+  categoryData.sort((a, b) => {
+    if (a.position === b.position) {
+      return a.slug.localeCompare(b.slug);
+    }
+
+    return (a.position ?? Infinity) - (b.position ?? Infinity);
+  });
 
   return [rootPosts, ...categoryData];
 }
@@ -95,7 +131,9 @@ export default async function CourseList() {
               ))
             ) : (
               <li key={cat.slug}>
-                <p className="mb-2 font-bold uppercase">{cat.slug}</p>
+                <p className="mb-2 font-bold uppercase">
+                  {cat.title ?? cat.slug}
+                </p>
                 <ul>
                   {cat.posts.map((post) => (
                     <li key={post.slug} className="mb-2">

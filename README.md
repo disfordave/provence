@@ -147,6 +147,17 @@ export const metadata = {
 
 Le contenu d'un cours et les informations qui le décrivent restent ainsi au même endroit.
 
+Chaque sous-dossier devient une catégorie de la navigation. Son nom sert d'adresse et, par défaut, de titre. Un fichier `category.json` placé dans le dossier peut lui donner un titre plus lisible, sans changer l'adresse, ainsi qu'une position dans la liste :
+
+```json
+{
+  "title": "Pour les anglophones",
+  "position": 3
+}
+```
+
+Les catégories sans position viennent après les autres, par ordre alphabétique.
+
 ### Le sommaire vient de l'article réellement rendu
 
 Je ne voulais pas maintenir manuellement une deuxième structure représentant les titres d'un cours.
