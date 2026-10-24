@@ -3,8 +3,10 @@ import InteractiveSidebarMenu from "@/components/InteractiveSidebarMenu";
 import TableOfContents from "@/components/TableOfContents";
 
 const sidebarStyleClassName = "hidden lg:col-span-1 lg:block";
+// The bottom padding lets the end of a long sidebar scroll clear of the
+// floating notes button.
 const sidebarContentStyleClassName =
-  "h-screen overflow-y-auto sticky top-0 p-4 lg:p-6";
+  "h-screen overflow-y-auto sticky top-0 p-4 lg:p-6 lg:pb-24";
 
 export default function CourseLayout({ children }: LayoutProps<"/cours">) {
   return (
