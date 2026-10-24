@@ -3,6 +3,8 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useExclusiveOverlay } from "@/lib/overlays";
+import { isSingleKeyShortcut } from "@/lib/shortcuts";
 
 export default function InteractiveSidebarMenu({
   children,
@@ -12,6 +14,7 @@ export default function InteractiveSidebarMenu({
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  useExclusiveOverlay("menu", isOpen, setIsOpen);
 
   // Toggle background scrolling
   useEffect(() => {
@@ -37,6 +40,24 @@ export default function InteractiveSidebarMenu({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
+
+  // M presses the menu button, but only on screens where the button is shown
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const button = toggleButtonRef.current;
+      if (
+        !isSingleKeyShortcut(event, "m") ||
+        !button?.getClientRects().length
+      ) {
+        return;
+      }
+      event.preventDefault();
+      setIsOpen((open) => !open);
+      button.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   useEffect(() => {
     const close = () => {
@@ -88,6 +109,8 @@ export default function InteractiveSidebarMenu({
           className="fixed right-8 bottom-8 z-50 block bg-neutral-950 p-3 text-nowrap text-white shadow-2xl transition-colors hover:bg-neutral-800 lg:hidden dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
           aria-expanded={isOpen}
           aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-keyshortcuts="M"
+          title="Menu (M)"
         >
           {isOpen ? (
             <XMarkIcon className="size-6" />

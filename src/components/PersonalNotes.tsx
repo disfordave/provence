@@ -3,6 +3,8 @@
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { readNote, subscribeToNote, writeNote } from "@/lib/notes";
+import { useExclusiveOverlay } from "@/lib/overlays";
+import { isSingleKeyShortcut } from "@/lib/shortcuts";
 
 // The server has no storage, and the panel starts closed anyway.
 function getServerSnapshot() {
@@ -16,18 +18,49 @@ export default function PersonalNotes() {
     getServerSnapshot,
   );
   const [isOpen, setIsOpen] = useState(false);
-  const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useExclusiveOverlay("notes", isOpen, setIsOpen);
 
-  // Opening the panel puts the cursor at the end, where a note usually goes on.
   useEffect(() => {
+    const panel = panelRef.current;
     const textarea = textareaRef.current;
-    if (!isOpen || !textarea) return;
+    if (!isOpen || !panel || !textarea) return;
+
+    // Opening the panel puts the cursor at the end, where a note usually goes on.
+    const previous = document.activeElement;
     const end = textarea.value.length;
     textarea.focus();
     textarea.setSelectionRange(end, end);
     textarea.scrollTop = textarea.scrollHeight;
+
+    // Closing hands focus back to whatever had it before, so a shortcut used
+    // mid-page does not leave it on the notes button, where Space would reopen
+    // the panel. Focus that has moved elsewhere in the meantime stays there.
+    return () => {
+      const active = document.activeElement;
+      if (active && active !== document.body && !panel.contains(active)) return;
+
+      if (previous instanceof HTMLElement && previous !== document.body) {
+        previous.focus();
+      } else if (active instanceof HTMLElement) {
+        active.blur();
+      }
+    };
   }, [isOpen]);
+
+  // N opens the notes from anywhere on the page. Inside the panel, an n is just
+  // typing, so Escape is the way back out.
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (isSingleKeyShortcut(event, "n")) {
+        event.preventDefault();
+        setIsOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   return (
     <>
@@ -42,14 +75,14 @@ export default function PersonalNotes() {
         ></button>
       )}
       <section
+        ref={panelRef}
         id="personal-notes"
-        aria-label="Mes notes"
+        aria-label="Notes"
         hidden={!isOpen}
         onKeyDown={(event) => {
           // Escape also ends an IME composition, which must not close the panel.
           if (event.key === "Escape" && !event.nativeEvent.isComposing) {
             setIsOpen(false);
-            toggleButtonRef.current?.focus();
           }
         }}
         className="fixed inset-x-4 top-4 z-50 border border-neutral-500/10 bg-neutral-50 p-4 shadow-2xl sm:inset-x-auto sm:top-auto sm:right-8 sm:bottom-40 sm:w-96 lg:bottom-24 dark:bg-neutral-900"
@@ -58,7 +91,7 @@ export default function PersonalNotes() {
           htmlFor="personal-notes-text"
           className="mb-2 block text-base font-bold"
         >
-          Mes notes
+          Notes
         </label>
         <textarea
           id="personal-notes-text"
@@ -70,15 +103,20 @@ export default function PersonalNotes() {
         />
         <p className="mt-2 text-xs text-neutral-500">
           Enregistré automatiquement dans ce navigateur.
+          <span className="hidden lg:inline">
+            {" "}
+            Raccourcis : N pour ouvrir, Échap pour fermer.
+          </span>
         </p>
       </section>
       <button
-        ref={toggleButtonRef}
         onClick={() => setIsOpen(!isOpen)}
         className="fixed right-8 bottom-24 z-50 bg-neutral-950 p-3 text-white shadow-2xl transition-colors hover:bg-neutral-800 lg:bottom-8 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
         aria-expanded={isOpen}
         aria-controls="personal-notes"
-        aria-label={isOpen ? "Fermer mes notes" : "Ouvrir mes notes"}
+        aria-label={isOpen ? "Fermer les notes" : "Ouvrir les notes"}
+        aria-keyshortcuts="N"
+        title="Notes (N)"
       >
         {isOpen ? (
           <XMarkIcon className="size-6" />
