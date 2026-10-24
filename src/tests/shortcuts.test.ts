@@ -4,7 +4,9 @@ import { isSingleKeyShortcut } from "@/lib/shortcuts";
 const page = { isContentEditable: false, closest: () => null };
 const field = { isContentEditable: false, closest: () => ({}) };
 
-function keydown(init: Partial<KeyboardEvent> & { target?: object }) {
+function keydown(
+  init: Omit<Partial<KeyboardEvent>, "target"> & { target?: object },
+) {
   return {
     key: "n",
     code: "KeyN",

@@ -69,14 +69,10 @@ export default function SearchBar() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
-  // Open from anywhere with the shortcut readers expect from a search field,
-  // or with R, for « rechercher ».
+  // R, for « rechercher », opens the search from anywhere on the page.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        setIsOpen((open) => !open);
-      } else if (isSingleKeyShortcut(event, "r")) {
+      if (isSingleKeyShortcut(event, "r")) {
         event.preventDefault();
         setIsOpen(true);
       }
@@ -223,8 +219,8 @@ export default function SearchBar() {
       <button
         onClick={() => setIsOpen(true)}
         className="flex gap-2"
-        aria-keyshortcuts="R Meta+K Control+K"
-        title="Rechercher (R ou ⌘K)"
+        aria-keyshortcuts="R"
+        title="Rechercher (R)"
       >
         <div className="text hidden w-48 border-0 border-transparent bg-white px-2 py-0.75 text-left transition-colors focus:border-black focus:outline-0 lg:block dark:bg-neutral-900 dark:focus:border-white">
           <span className="opacity-60">Rechercher...</span>

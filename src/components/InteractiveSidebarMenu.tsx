@@ -43,7 +43,10 @@ export default function InteractiveSidebarMenu({
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       const button = toggleButtonRef.current;
-      if (!isSingleKeyShortcut(event, "m") || !button?.getClientRects().length) {
+      if (
+        !isSingleKeyShortcut(event, "m") ||
+        !button?.getClientRects().length
+      ) {
         return;
       }
       event.preventDefault();
