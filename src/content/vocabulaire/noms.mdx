@@ -614,7 +614,7 @@ import { Question, Quiz } from "@/components/content/Quiz";
 
 ### Afrique
 
-| Pays                                | Nationalité                    |
+| Pays ou région                      | Nationalité                    |
 | ----------------------------------- | ------------------------------ |
 | l'Algérie                           | algérien / algérienne          |
 | le Bénin                            | béninois / béninoise           |
@@ -630,6 +630,10 @@ import { Question, Quiz } from "@/components/content/Quiz";
 | la Guinée                           | guinéen / guinéenne            |
 | le Madagascar[^1]                   | malgache / malgache            |
 | le Maroc                            | marocain / marocaine           |
+| Maurice[^2]                         | mauricien / mauricienne        |
+| la Mauritanie                       | mauritanien / mauritanienne    |
+| Mayotte[^2]                         | mahorais / mahoraise           |
+| La Réunion                          | réunionnais / réunionnaise     |
 | le Sénégal                          | sénégalais / sénégalaise       |
 | les Seychelles                      | seychellois / seychelloise     |
 | le Tchad                            | tchadien / tchadienne          |
@@ -643,25 +647,41 @@ import { Question, Quiz } from "@/components/content/Quiz";
 | le Nigéria                          | nigérian / nigériane           |
 | l'Ouganda                           | ougandais / ougandaise         |
 | la Tanzanie                         | tanzanien / tanzanienne        |
+| le Zimbabwe                         | zimbabwéen / zimbabwéenne      |
 
 ### Amérique du Nord
 
-| Pays ou région       | Nationalité                          |
-| -------------------- | ------------------------------------ |
-| le Canada            | canadien / canadienne                |
-| le Nouveau-Brunswick | néo-brunswickois / néo-brunswickoise |
-| le Québec            | québécois / québécoise               |
-| le Haïti[^1]         | haïtien / haïtienne                  |
-| les États-Unis       | américain / américaine               |
-| le Mexique           | mexicain / mexicaine                 |
+| Pays ou région               | Nationalité                                                    |
+| ---------------------------- | -------------------------------------------------------------- |
+| le Canada                    | canadien / canadienne                                          |
+| le Nouveau-Brunswick         | néo-brunswickois / néo-brunswickoise                           |
+| le Québec                    | québécois / québécoise                                         |
+| la Guadeloupe                | guadeloupéen / guadeloupéenne                                  |
+| le Haïti[^1]                 | haïtien / haïtienne                                            |
+| la Martinique                | martiniquais / martiniquaise                                   |
+| Saint-Barthélemy[^2]         | saint-barthélemois / saint-barthélemoise                       |
+| Saint-Martin[^2]             | saint-martinois / saint-martinoise                             |
+| Saint-Pierre-et-Miquelon[^2] | saint-pierrais / saint-pierraise, miquelonnais / miquelonnaise |
+| les États-Unis               | américain / américaine                                         |
+| le Mexique                   | mexicain / mexicaine                                           |
 
 ### Amérique du Sud
 
-| Pays        | Nationalité             |
-| ----------- | ----------------------- |
-| l'Argentine | argentin / argentine    |
-| le Brésil   | brésilien / brésilienne |
-| le Chili    | chilien / chilienne     |
+| Pays ou région | Nationalité                 |
+| -------------- | --------------------------- |
+| la Guyane      | guyanais / guyanaise        |
+| l'Argentine    | argentin / argentine        |
+| la Bolivie     | bolivien / bolivienne       |
+| le Brésil      | brésilien / brésilienne     |
+| le Chili       | chilien / chilienne         |
+| la Colombie    | colombien / colombienne     |
+| l'Équateur     | équatorien / équatorienne   |
+| le Guyana      | guyanien / guyanienne       |
+| le Paraguay    | paraguayen / paraguayenne   |
+| le Pérou       | péruvien / péruvienne       |
+| le Suriname    | surinamais / surinamaise    |
+| l'Uruguay      | uruguayen / uruguayenne     |
+| le Venezuela   | vénézuélien / vénézuélienne |
 
 ### Asie
 
@@ -695,9 +715,11 @@ import { Question, Quiz } from "@/components/content/Quiz";
 | Pays ou région        | Nationalité                      |
 | --------------------- | -------------------------------- |
 | la Belgique           | belge / belge                    |
+| Bruxelles[^2]         | bruxellois / bruxelloise         |
 | la Wallonie           | wallon / wallonne                |
 | la France             | français / française             |
 | le Luxembourg         | luxembourgeois / luxembourgeoise |
+| Monaco[^2]            | monégasque / monégasque          |
 | la Suisse             | suisse / suisse                  |
 | l'Allemagne           | allemand / allemande             |
 | l'Autriche            | autrichien / autrichienne        |
@@ -731,10 +753,17 @@ import { Question, Quiz } from "@/components/content/Quiz";
 
 ### Océanie
 
-| Pays                | Nationalité                    |
-| ------------------- | ------------------------------ |
-| l'Australie         | australien / australienne      |
-| la Nouvelle-Zélande | néo-zélandais / néo-zélandaise |
+| Pays ou région               | Nationalité                                    |
+| ---------------------------- | ---------------------------------------------- |
+| la Nouvelle-Calédonie        | néo-calédonien / néo-calédonienne              |
+| la Polynésie française       | polynésien / polynésienne                      |
+| le Vanuatu                   | vanuatais / vanuataise                         |
+| Wallis-et-Futuna[^2]         | wallisien / wallisienne, futunien / futunienne |
+| l'Australie                  | australien / australienne                      |
+| les Fidji                    | fidjien / fidjienne                            |
+| la Nouvelle-Zélande          | néo-zélandais / néo-zélandaise                 |
+| la Papouasie-Nouvelle-Guinée | papouan-néo-guinéen / papouane-néo-guinéenne   |
+| les Tonga                    | tongien / tongienne                            |
 
 ---
 
@@ -789,4 +818,4 @@ Combien font **un milliard** et **un billion** ?
 
 [^1]: Dans la pratique, l'article est souvent omis : on rencontre généralement _à Djibouti_, _en Haïti_ et _à Madagascar_, même si ces trois noms de pays sont indiqués comme masculins dans la source.
 
-[^2]: Ces noms de pays s'emploient sans article : _à Chypre_, _à Malte_, _à Oman_, _à Singapour_.
+[^2]: Ces noms s'emploient sans article : _à Bruxelles_, _à Chypre_, _à Malte_, _à Maurice_, _à Mayotte_, _à Monaco_, _à Oman_, _à Saint-Barthélemy_, _à Saint-Martin_, _à Saint-Pierre-et-Miquelon_, _à Singapour_, _à Wallis-et-Futuna_.
