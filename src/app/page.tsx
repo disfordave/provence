@@ -51,7 +51,7 @@ export default async function Home() {
         <p className="px-4 font-medium tracking-wide text-neutral-600 uppercase dark:text-neutral-400">
           Bonjour et bienvenue sur
         </p>
-        <h1 className="px-4 text-5xl leading-none font-extrabold tracking-tighter uppercase sm:text-7xl">
+        <h1 className="px-4 text-5xl leading-none font-bold tracking-tighter uppercase sm:text-7xl">
           La langue française
         </h1>
         <p className="max-w-xl px-4 text-lg text-neutral-700 dark:text-neutral-300">
