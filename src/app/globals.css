@@ -16,13 +16,3 @@ body {
   font-family: var(--font-sans);
   height: 100%;
 }
-
-.prose summary {
-  user-select: none;
-}
-
-.prose summary p {
-  display: inline-block;
-  font-weight: 500;
-  margin-left: 0.25rem;
-}

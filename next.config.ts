@@ -19,12 +19,13 @@ const withMDX = createMDX({
       footnoteBackLabel: "Retour au texte",
     },
     // Gives every heading a unique id, so repeated headings get a numbered
-    // suffix instead of colliding. The local plugin needs an absolute path:
-    // the loader resolves plugins from the folder of each MDX file. Turbopack
-    // does not see changes to it, so delete `.next` after editing it.
+    // suffix instead of colliding. The local plugins need absolute paths: the
+    // loader resolves plugins from the folder of each MDX file. Turbopack does
+    // not see changes to them, so delete `.next` after editing one.
     rehypePlugins: [
       "rehype-slug",
       path.join(process.cwd(), "src/lib/rehype-examples.mjs"),
+      path.join(process.cwd(), "src/lib/french-spaces.mjs"),
     ],
   },
   extension: /\.(md|mdx)$/,

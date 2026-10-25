@@ -200,7 +200,13 @@ Dans les cours, un exemple est annoncé par **Exemple :** suivi de la phrase, ou
 
 Le plugin `src/lib/rehype-examples.mjs` repère ces étiquettes au moment du build et les transmet à `mdx-components.tsx`, qui les met en forme. Les cours gardent ainsi une écriture simple.
 
-Turbopack ne charge les plugins MDX qu'à partir d'un nom de paquet ou d'un chemin : ce plugin local est déclaré dans `next.config.ts` avec un chemin absolu.
+### Les espaces insécables sont ajoutées au build
+
+En français, on met une espace avant ? ! ; : et », et après «. Avec une espace ordinaire, la ligne peut se couper juste avant le signe, qui se retrouve seul au début de la ligne suivante.
+
+Le plugin `src/lib/french-spaces.mjs` remplace donc ces espaces par des espaces insécables au moment du build. On continue d'écrire les cours avec une espace normale, et la recherche affiche le même texte que les pages.
+
+Turbopack ne charge les plugins MDX qu'à partir d'un nom de paquet ou d'un chemin : ces deux plugins locaux sont déclarés dans `next.config.ts` avec un chemin absolu.
 
 ---
 
@@ -328,6 +334,7 @@ src/
 │
 ├── content/
 │   ├── bienvenue.mdx
+│   ├── essentiel.mdx
 │   ├── ressources.mdx
 │   ├── anglophones/
 │   ├── examens/
@@ -335,6 +342,7 @@ src/
 │   └── vocabulaire/
 │
 ├── lib/
+│   ├── french-spaces.mjs
 │   ├── rehype-examples.mjs
 │   ├── search.ts
 │   └── search-content.ts

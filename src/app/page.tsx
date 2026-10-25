@@ -73,7 +73,9 @@ export default async function Home() {
             Ressources
           </Link>
         </div>
-        <p className="px-4 text-sm text-neutral-600 dark:text-neutral-400">
+        {/* The shortcuts need a keyboard. A phone has none, and no mouse or
+            trackpad either, which is what the media query can detect. */}
+        <p className="hidden px-4 text-sm text-neutral-600 dark:text-neutral-400 any-pointer-fine:block">
           Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher et
           sur <kbd className={kbdClassName}>N</kbd> pour prendre des notes.
         </p>
@@ -118,7 +120,8 @@ export default async function Home() {
 
       <figure className="flex flex-col items-center gap-2 text-center">
         <blockquote className="max-w-xl text-lg font-medium">
-          « Il est interdit de pleurer à cause de la langue française. »
+          «&nbsp;Il est interdit de pleurer à cause de la langue
+          française.&nbsp;»
         </blockquote>
         <figcaption className="text-sm text-neutral-600 dark:text-neutral-400">
           — Un enseignant,{" "}

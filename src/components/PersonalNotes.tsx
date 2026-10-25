@@ -96,7 +96,7 @@ export default function PersonalNotes() {
   // The notes only live in this browser, so there is no undo.
   const clear = () => {
     if (
-      window.confirm("Effacer toutes les notes ? Cette action est définitive.")
+      window.confirm("Effacer toutes les notes ? Cette action est définitive.")
     ) {
       writeNote("");
       textareaRef.current?.focus();
@@ -170,9 +170,9 @@ export default function PersonalNotes() {
         />
         <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
           Enregistré automatiquement dans ce navigateur.
-          <span className="hidden lg:inline">
+          <span className="hidden any-pointer-fine:lg:inline">
             {" "}
-            Raccourcis : N pour ouvrir, Échap pour fermer.
+            Raccourcis&nbsp;: N pour ouvrir, Échap pour fermer.
           </span>
         </p>
         <p className="sr-only" aria-live="polite">

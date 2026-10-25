@@ -2,6 +2,7 @@ import type { Article } from "@/app/cours/[...slug]/page";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { Fragment } from "react/jsx-runtime";
+import { frenchSpaces } from "@/lib/french-spaces.mjs";
 import CourseListItem from "./CourseListItem";
 
 export type Post = {
@@ -63,7 +64,14 @@ async function getCategoryMetadata(
       path.join(...joinedPath, categorySlug, "category.json"),
       "utf8",
     );
-    return JSON.parse(file) as CategoryMetadata;
+    const { title, description, position } = JSON.parse(
+      file,
+    ) as CategoryMetadata;
+    return {
+      title: title && frenchSpaces(title),
+      description: description && frenchSpaces(description),
+      position,
+    };
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "ENOENT") {
       return {};
