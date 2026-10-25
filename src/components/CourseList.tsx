@@ -13,11 +13,12 @@ export type Category = {
   isRoot: boolean;
   slug: string;
   title?: string;
+  description?: string;
   position?: number;
   posts: Post[];
 };
 
-type CategoryMetadata = Pick<Category, "title" | "position">;
+type CategoryMetadata = Pick<Category, "title" | "description" | "position">;
 
 const joinedPath = [process.cwd(), "src", "content"];
 
@@ -52,7 +53,8 @@ export async function getPosts(categorySlug?: string): Promise<Post[]> {
 }
 
 // A folder can describe itself in a `category.json`: a readable title, so its
-// slug stays short in the URL, and its position in the navigation.
+// slug stays short in the URL, a description for the home page, and its
+// position in the navigation.
 async function getCategoryMetadata(
   categorySlug: string,
 ): Promise<CategoryMetadata> {
@@ -91,11 +93,14 @@ export async function getCategories(): Promise<Category[]> {
   const categoryData = await Promise.all(
     categories.map(async (cat) => {
       const posts = await getPosts(cat.name);
-      const { title, position } = await getCategoryMetadata(cat.name);
+      const { title, description, position } = await getCategoryMetadata(
+        cat.name,
+      );
       return {
         isRoot: false,
         slug: cat.name,
         title,
+        description,
         position,
         posts: posts,
       };

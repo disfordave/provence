@@ -164,7 +164,7 @@ export default function PersonalNotes() {
           placeholder="Un mot, une règle, une phrase entendue..."
           className="block h-64 w-full resize-y border-2 border-transparent bg-white p-3 text-base leading-6 transition-colors focus:border-black focus:outline-0 dark:bg-neutral-950 dark:focus:border-white"
         />
-        <p className="mt-2 text-xs text-neutral-500">
+        <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
           Enregistré automatiquement dans ce navigateur.
           <span className="hidden lg:inline">
             {" "}
