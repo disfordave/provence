@@ -7,6 +7,7 @@ import {
   TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { readNote, subscribeToNote, writeNote } from "@/lib/notes";
 import { useExclusiveOverlay } from "@/lib/overlays";
@@ -31,6 +32,9 @@ export default function PersonalNotes() {
   const panelRef = useRef<HTMLElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useExclusiveOverlay("notes", isOpen, setIsOpen);
+  // Below lg, the course pages keep the bottom corner for the menu button, so
+  // the notes move up there. Elsewhere they take the corner.
+  const isAboveMenu = usePathname().startsWith("/cours");
 
   useEffect(() => {
     const panel = panelRef.current;
@@ -122,7 +126,7 @@ export default function PersonalNotes() {
             setIsOpen(false);
           }
         }}
-        className="fixed inset-x-4 top-4 z-50 border border-neutral-500/10 bg-neutral-50 p-4 shadow-2xl sm:inset-x-auto sm:top-auto sm:right-8 sm:bottom-40 sm:w-96 lg:bottom-24 dark:bg-neutral-900"
+        className={`fixed inset-x-4 top-4 z-50 border border-neutral-500/10 bg-neutral-50 p-4 shadow-2xl sm:inset-x-auto sm:top-auto sm:right-8 sm:w-96 dark:bg-neutral-900 ${isAboveMenu ? "sm:bottom-40 lg:bottom-24" : "sm:bottom-24"}`}
       >
         <div className="mb-2 flex items-center gap-1">
           <label
@@ -177,7 +181,7 @@ export default function PersonalNotes() {
       </section>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-8 bottom-24 z-50 bg-neutral-950 p-3 text-white shadow-2xl transition-colors hover:bg-neutral-800 lg:bottom-8 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200"
+        className={`fixed right-8 z-50 bg-neutral-950 p-3 text-white shadow-2xl transition-colors hover:bg-neutral-800 dark:bg-neutral-50 dark:text-black dark:hover:bg-neutral-200 ${isAboveMenu ? "bottom-24 lg:bottom-8" : "bottom-8"}`}
         aria-expanded={isOpen}
         aria-controls="personal-notes"
         aria-label={isOpen ? "Fermer les notes" : "Ouvrir les notes"}

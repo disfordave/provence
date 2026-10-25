@@ -1,8 +1,34 @@
+import {
+  AcademicCapIcon,
+  BookOpenIcon,
+  DocumentTextIcon,
+  LanguageIcon,
+  PuzzlePieceIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { getCategories } from "@/components/CourseList";
 
 const kbdClassName =
   "border border-neutral-400 px-1.5 font-mono text-xs dark:border-neutral-600";
+
+const tileLetters = ["é", "à", "ç", "ê", "œ"];
+
+// Keyed by content folder; a category not listed here gets the generic icon.
+const categoryIcons: Record<string, typeof DocumentTextIcon> = {
+  vocabulaire: BookOpenIcon,
+  grammaire: PuzzlePieceIcon,
+  examens: AcademicCapIcon,
+  anglophones: LanguageIcon,
+};
+
+function CategoryIcon({ slug }: { slug: string }) {
+  const Icon = categoryIcons[slug] ?? DocumentTextIcon;
+  return (
+    <span className="flex size-10 items-center justify-center bg-neutral-950 text-white dark:bg-neutral-50 dark:text-black">
+      <Icon className="size-6" />
+    </span>
+  );
+}
 
 export default async function Home() {
   // Built from the content folders, like the sidebar, so a new category or
@@ -12,6 +38,16 @@ export default async function Home() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-16 px-4 py-16 sm:py-24">
       <section className="flex flex-col items-center gap-4 text-center">
+        <div aria-hidden="true" className="mb-2 flex gap-2">
+          {tileLetters.map((letter) => (
+            <span
+              key={letter}
+              className="flex size-12 items-center justify-center border border-neutral-950 text-2xl font-bold odd:-rotate-3 even:rotate-3 nth-3:bg-neutral-950 nth-3:text-white sm:size-14 sm:text-3xl dark:border-neutral-50 dark:nth-3:bg-neutral-50 dark:nth-3:text-black"
+            >
+              {letter}
+            </span>
+          ))}
+        </div>
         <p className="px-4 font-medium tracking-wide text-neutral-600 uppercase dark:text-neutral-400">
           Bonjour et bienvenue sur
         </p>
@@ -38,11 +74,8 @@ export default async function Home() {
           </Link>
         </div>
         <p className="px-4 text-sm text-neutral-600 dark:text-neutral-400">
-          Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher
-          <span className="inline sm:hidden">
-            , sur <kbd className={kbdClassName}>M</kbd> pour le menu{" "}
-          </span>
-          et sur <kbd className={kbdClassName}>N</kbd> pour prendre des notes.
+          Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher et
+          sur <kbd className={kbdClassName}>N</kbd> pour prendre des notes.
         </p>
       </section>
       <section aria-label="Cours" className="grid gap-4 sm:grid-cols-2">
@@ -51,12 +84,15 @@ export default async function Home() {
             key={cat.slug}
             className="flex flex-col gap-3 border border-neutral-200 p-6 dark:border-neutral-800"
           >
-            <div className="flex items-baseline justify-between gap-4">
-              <h2 className="font-bold uppercase">{cat.title ?? cat.slug}</h2>
+            <div className="flex items-start justify-between gap-4">
+              <CategoryIcon slug={cat.slug} />
               <span className="text-sm text-nowrap text-neutral-600 dark:text-neutral-400">
                 {cat.posts.length} cours
               </span>
             </div>
+            <h2 className="mt-2 font-bold uppercase">
+              {cat.title ?? cat.slug}
+            </h2>
             {cat.description && (
               <p className="text-neutral-700 dark:text-neutral-300">
                 {cat.description}
