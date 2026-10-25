@@ -3,7 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import PersonalNotes from "@/components/PersonalNotes";
+import BackToTop from "@/components/BackToTop";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex-sans",
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </div>
         </main>
         <Footer />
-        <PersonalNotes />
+        <BackToTop />
       </body>
     </html>
   );

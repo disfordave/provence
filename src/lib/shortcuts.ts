@@ -16,7 +16,7 @@ function typedLetter(event: KeyboardEvent): string | null {
 }
 
 // Single-letter shortcuts, as on GitHub or YouTube. They never fire while
-// typing in a field, the search box and the notes included.
+// typing in a field, the search box included.
 export function isSingleKeyShortcut(
   event: KeyboardEvent,
   letter: string,

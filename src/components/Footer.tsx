@@ -8,7 +8,7 @@ export default function Footer() {
         {currentYear !== startYear ? `-${currentYear}` : ""}{" "}
         <a
           href="https://hsw.is"
-          className="hover:underline"
+          className="underline hover:no-underline"
           target="_blank"
           rel="noopener noreferrer"
         >

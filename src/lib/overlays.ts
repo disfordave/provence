@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const OVERLAY_OPEN = "overlay-open";
 
-// Only one overlay (the search, the notes, the menu) is open at a time:
+// Only one overlay (the search or the menu) is open at a time:
 // opening one, with a shortcut or a click, closes the others.
 export function useExclusiveOverlay(
   name: string,
