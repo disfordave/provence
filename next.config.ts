@@ -13,7 +13,8 @@ const withMDX = createMDX({
     remarkPlugins: ["remark-gfm"],
     // Gives every heading a unique id, so repeated headings get a numbered
     // suffix instead of colliding. The local plugin needs an absolute path:
-    // the loader resolves plugins from the folder of each MDX file.
+    // the loader resolves plugins from the folder of each MDX file. Turbopack
+    // does not see changes to it, so delete `.next` after editing it.
     rehypePlugins: [
       "rehype-slug",
       path.join(process.cwd(), "src/lib/rehype-examples.mjs"),

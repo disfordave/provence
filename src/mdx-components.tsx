@@ -1,6 +1,5 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import ListenButton from "@/components/content/ListenButton";
 
 function joinClassNames(...classNames: (string | false | undefined)[]) {
   return classNames.filter(Boolean).join(" ");
@@ -67,7 +66,6 @@ const components: MDXComponents = {
       </p>
     );
   },
-  ListenButton,
   // The courses state their rules and formulas in blockquotes, so each one is
   // a card that stands out from the explanation around it. Cards in a row,
   // like a series of examples, stay together.

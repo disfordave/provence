@@ -7,7 +7,6 @@ type Node = {
   tagName?: string;
   properties?: Record<string, unknown>;
   children?: Node[];
-  attributes?: { value: string }[];
 };
 
 function text(value: string): Node {
@@ -23,15 +22,7 @@ function transform(...children: Node[]) {
   return children;
 }
 
-// What the <ListenButton> ending this node reads, if there is one.
-function spokenText(node?: Node) {
-  const last = node?.children?.at(-1);
-  return last?.type === "mdxJsxTextElement"
-    ? last.attributes?.[0].value
-    : undefined;
-}
-
-test("reads the sentence that follows the label on the same line", () => {
+test("takes the label out of the sentence that follows it", () => {
   const [paragraph] = transform(
     element(
       "p",
@@ -41,51 +32,31 @@ test("reads the sentence that follows the label on the same line", () => {
   );
 
   expect(paragraph.properties).toEqual({ dataExample: "Exemple" });
-  expect(paragraph.children?.[0]).toEqual(text(" Je gagne un bon salaire."));
-  expect(spokenText(paragraph)).toBe("Je gagne un bon salaire.");
+  expect(paragraph.children).toEqual([text(" Je gagne un bon salaire.")]);
 });
 
-test("reads each item of the list under a label on its own", () => {
-  const [paragraph, , list] = transform(
+test("empties a label on its own and leaves the examples under it", () => {
+  const examples = element("ul", element("li", text("le livre")));
+  const [paragraph] = transform(
     element("p", element("strong", text("Exemples"))),
     text("\n"),
-    element(
-      "ul",
-      text("\n"),
-      element("li", text("le livre")),
-      text("\n"),
-      element("li", text("la maison")),
-    ),
+    examples,
   );
 
   expect(paragraph.properties).toEqual({ dataExample: "Exemples" });
   expect(paragraph.children).toEqual([]);
-  expect(
-    list.children?.filter((node) => node.type === "element").map(spokenText),
-  ).toEqual(["le livre", "la maison"]);
+  expect(examples).toEqual(element("ul", element("li", text("le livre"))));
 });
 
-test("reads the quotes after a label, with a pause at the arrow", () => {
-  const quote = (...children: Node[]) =>
-    element("blockquote", text("\n"), element("p", ...children), text("\n"));
-  const [, , first, , second, , rule] = transform(
-    element("p", element("strong", text("Exemple :"))),
-    text("\n"),
-    quote(
-      element("strong", text("mon")),
-      text(" livre → déterminant possessif"),
+test("finds labels inside other elements", () => {
+  const [quote] = transform(
+    element(
+      "blockquote",
+      element("p", element("strong", text("Exemple :")), text(" Où vas-tu ?")),
     ),
-    text("\n"),
-    quote(text("le "), element("strong", text("mien")), text(" → pronom")),
-    text("\n"),
-    element("hr"),
   );
 
-  expect(spokenText(first.children?.[1])).toBe(
-    "mon livre, déterminant possessif",
-  );
-  expect(spokenText(second.children?.[1])).toBe("le mien, pronom");
-  expect(rule.children).toEqual([]);
+  expect(quote.children?.[0].properties).toEqual({ dataExample: "Exemple" });
 });
 
 test("leaves other bold openings alone", () => {
