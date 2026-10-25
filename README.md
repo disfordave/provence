@@ -179,12 +179,37 @@ src/components/content/
 
 L'objectif est qu'ils restent suffisamment autonomes pour pouvoir être utilisés depuis un cours sans transformer le contenu lui-même en application React complexe.
 
+C'est le cas de `Quiz`, utilisé par les rubriques « Vérifier ses connaissances » : chaque réponse reste cachée jusqu'à ce qu'on ouvre la question. Le premier paragraphe d'une `Question` en est l'énoncé, et la suite la réponse :
+
+```mdx
+import { Question, Quiz } from "@/components/content/Quiz";
+
+<Quiz>
+<Question>
+Traduisez « When I arrive, I'll call you ».
+
+**Quand j'arriverai, je t'appellerai.**
+
+</Question>
+</Quiz>
+```
+
+### Les exemples sont repérés au build
+
+Dans les cours, un exemple est annoncé par **Exemple :** suivi de la phrase, ou par **Exemple** seul au-dessus d'une liste ou de citations. L'idée est de pouvoir écouter ces phrases sans changer cette façon d'écrire.
+
+Le plugin `src/lib/rehype-examples.mjs` repère donc les exemples au moment du build. Il transmet l'étiquette à `mdx-components.tsx`, qui la met en forme, et ajoute après chaque exemple un `ListenButton`, qui le lit avec la synthèse vocale du navigateur.
+
+Turbopack ne charge les plugins MDX qu'à partir d'un nom de paquet ou d'un chemin : ce plugin local est déclaré dans `next.config.ts` avec un chemin absolu.
+
 ---
 
 ## Fonctionnalités
 
 - **Cours en MDX** : chaque cours est un fichier lisible et versionné dans Git.
 - **Composants React dans les cours** : une notion peut devenir interactive lorsqu'une représentation visuelle m'aide à la comprendre.
+- **Écoute des exemples** : chaque exemple d'un cours peut être lu à voix haute par la synthèse vocale du navigateur.
+- **Quiz** : en fin de cours, les questions cachent leur réponse jusqu'à ce qu'on les ouvre.
 - **Sommaire automatique** : construit à partir des titres réellement rendus dans l'article.
 - **Ancres de titres** : générées avec `rehype-slug`.
 - **Liste des cours automatique** : les fichiers présents dans `src/content` sont découverts sans index manuel.
@@ -299,6 +324,8 @@ src/
 │   ├── Footer.tsx
 │   ├── Logo.tsx
 │   └── content/
+│       ├── ListenButton.tsx
+│       ├── Quiz.tsx
 │       └── TensesSlider.tsx
 │
 ├── content/
@@ -310,6 +337,7 @@ src/
 │   └── vocabulaire/
 │
 ├── lib/
+│   ├── rehype-examples.mjs
 │   ├── search.ts
 │   └── search-content.ts
 │

@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import { Children, isValidElement } from "react";
+import ListenButton from "@/components/content/ListenButton";
 
 function joinClassNames(...classNames: (string | false | undefined)[]) {
   return classNames.filter(Boolean).join(" ");
@@ -27,17 +27,9 @@ function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
   };
 }
 
-// The courses introduce their examples with "**Exemple**" or "**Exemple :**".
-function isExampleLabel(
-  node: React.ReactNode,
-): node is React.ReactElement<{ children: string }> {
-  return (
-    isValidElement<{ children?: unknown }>(node) &&
-    node.type === "strong" &&
-    typeof node.props.children === "string" &&
-    /^Exemples?\s*:?$/.test(node.props.children)
-  );
-}
+type ParagraphProps = React.ComponentPropsWithoutRef<"p"> & {
+  "data-example"?: string;
+};
 
 const components: MDXComponents = {
   h1: createHeading(1),
@@ -54,27 +46,28 @@ const components: MDXComponents = {
     }
     return <Link href={href ?? ""} {...props} />;
   },
-  // An example label turns into a small caption, above the sentence that
-  // follows it on the same line or close above the list or quote under it.
-  p: ({ children, ...props }) => {
-    const [first, ...rest] = Children.toArray(children);
-    if (!isExampleLabel(first)) return <p {...props}>{children}</p>;
+  // `rehype-examples.mjs` takes the "Exemple" label out of its paragraph and
+  // passes it here. It becomes a small caption, above the sentence on the same
+  // line, or close above the list or quotes when it stands alone.
+  p: ({ children, "data-example": label, ...props }: ParagraphProps) => {
+    if (!label) return <p {...props}>{children}</p>;
 
     return (
       <p
         {...props}
         className={joinClassNames(
-          rest.length === 0 && "mb-2 [&+blockquote]:mt-2 [&+ul]:mt-2",
+          !children && "mb-2 [&+blockquote]:mt-2 [&+ol]:mt-2 [&+ul]:mt-2",
           props.className,
         )}
       >
         <span className="block text-xs font-semibold tracking-wide text-neutral-600 uppercase dark:text-neutral-400">
-          {first.props.children.replace(/\s*:$/, "")}
+          {label}
         </span>
-        {rest}
+        {children}
       </p>
     );
   },
+  ListenButton,
   // The courses state their rules and formulas in blockquotes, so each one is
   // a card that stands out from the explanation around it. Cards in a row,
   // like a series of examples, stay together.

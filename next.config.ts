@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
@@ -11,8 +12,12 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: ["remark-gfm"],
     // Gives every heading a unique id, so repeated headings get a numbered
-    // suffix instead of colliding.
-    rehypePlugins: ["rehype-slug"],
+    // suffix instead of colliding. The local plugin needs an absolute path:
+    // the loader resolves plugins from the folder of each MDX file.
+    rehypePlugins: [
+      "rehype-slug",
+      path.join(process.cwd(), "src/lib/rehype-examples.mjs"),
+    ],
   },
   extension: /\.(md|mdx)$/,
 });
