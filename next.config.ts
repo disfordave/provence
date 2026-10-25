@@ -11,6 +11,13 @@ const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
     remarkPlugins: ["remark-gfm"],
+    // Footnotes come with English labels by default: screen readers read them,
+    // and the heading also appears in the Sommaire. Turbopack only passes plain
+    // values to the loader, so every back link shares one label.
+    remarkRehypeOptions: {
+      footnoteLabel: "Notes",
+      footnoteBackLabel: "Retour au texte",
+    },
     // Gives every heading a unique id, so repeated headings get a numbered
     // suffix instead of colliding. The local plugin needs an absolute path:
     // the loader resolves plugins from the folder of each MDX file. Turbopack
