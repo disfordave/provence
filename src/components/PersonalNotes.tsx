@@ -1,10 +1,19 @@
 "use client";
 
-import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ClipboardDocumentCheckIcon,
+  ClipboardDocumentIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { readNote, subscribeToNote, writeNote } from "@/lib/notes";
 import { useExclusiveOverlay } from "@/lib/overlays";
 import { isSingleKeyShortcut } from "@/lib/shortcuts";
+
+const panelButtonClassName =
+  "p-1.5 text-neutral-600 transition-colors hover:bg-neutral-200 hover:text-neutral-950 disabled:pointer-events-none disabled:opacity-40 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white";
 
 // The server has no storage, and the panel starts closed anyway.
 function getServerSnapshot() {
@@ -18,6 +27,7 @@ export default function PersonalNotes() {
     getServerSnapshot,
   );
   const [isOpen, setIsOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const panelRef = useRef<HTMLElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useExclusiveOverlay("notes", isOpen, setIsOpen);
@@ -62,6 +72,33 @@ export default function PersonalNotes() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  // The check mark turns back into the copy icon after a moment.
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => setCopied(false), 2000);
+    return () => clearTimeout(timer);
+  }, [copied]);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(note);
+      setCopied(true);
+    } catch {
+      // Without clipboard access, the text is selected for the reader to copy.
+      textareaRef.current?.select();
+    }
+  };
+
+  // The notes only live in this browser, so there is no undo.
+  const clear = () => {
+    if (
+      window.confirm("Effacer toutes les notes ? Cette action est définitive.")
+    ) {
+      writeNote("");
+      textareaRef.current?.focus();
+    }
+  };
+
   return (
     <>
       {/* Like the other overlays, a tap outside the panel closes it, but without
@@ -87,19 +124,45 @@ export default function PersonalNotes() {
         }}
         className="fixed inset-x-4 top-4 z-50 border border-neutral-500/10 bg-neutral-50 p-4 shadow-2xl sm:inset-x-auto sm:top-auto sm:right-8 sm:bottom-40 sm:w-96 lg:bottom-24 dark:bg-neutral-900"
       >
-        <label
-          htmlFor="personal-notes-text"
-          className="mb-2 block text-base font-bold"
-        >
-          Notes
-        </label>
+        <div className="mb-2 flex items-center gap-1">
+          <label
+            htmlFor="personal-notes-text"
+            className="flex-1 text-base font-bold"
+          >
+            Notes
+          </label>
+          <button
+            type="button"
+            onClick={copy}
+            disabled={note === ""}
+            aria-label="Copier les notes"
+            title={copied ? "Copié !" : "Copier"}
+            className={panelButtonClassName}
+          >
+            {copied ? (
+              <ClipboardDocumentCheckIcon className="size-5" />
+            ) : (
+              <ClipboardDocumentIcon className="size-5" />
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={clear}
+            disabled={note === ""}
+            aria-label="Effacer les notes"
+            title="Effacer"
+            className={panelButtonClassName}
+          >
+            <TrashIcon className="size-5" />
+          </button>
+        </div>
         <textarea
           id="personal-notes-text"
           ref={textareaRef}
           value={note}
           onChange={(event) => writeNote(event.target.value)}
           placeholder="Un mot, une règle, une phrase entendue..."
-          className="block h-64 w-full resize-y border-2 border-transparent bg-white p-3 text-sm leading-6 transition-colors focus:border-black focus:outline-0 dark:bg-neutral-950 dark:focus:border-white"
+          className="block h-64 w-full resize-y border-2 border-transparent bg-white p-3 text-base leading-6 transition-colors focus:border-black focus:outline-0 dark:bg-neutral-950 dark:focus:border-white"
         />
         <p className="mt-2 text-xs text-neutral-500">
           Enregistré automatiquement dans ce navigateur.
@@ -107,6 +170,9 @@ export default function PersonalNotes() {
             {" "}
             Raccourcis : N pour ouvrir, Échap pour fermer.
           </span>
+        </p>
+        <p className="sr-only" aria-live="polite">
+          {copied ? "Notes copiées." : ""}
         </p>
       </section>
       <button
