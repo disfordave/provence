@@ -22,13 +22,7 @@ export default async function Home() {
           Des cours clairs pour comprendre le français, éviter ses pièges et
           réussir le DELF B2.
         </p>
-        <p className="px-4 text-sm text-neutral-600 dark:text-neutral-400">
-          Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher
-          <span className="inline sm:hidden">
-            , sur <kbd className={kbdClassName}>M</kbd> pour le menu{" "}
-          </span>
-          et sur <kbd className={kbdClassName}>N</kbd> pour prendre des notes.
-        </p>
+
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/cours/bienvenue"
@@ -43,6 +37,13 @@ export default async function Home() {
             Ressources
           </Link>
         </div>
+        <p className="px-4 text-sm text-neutral-600 dark:text-neutral-400">
+          Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher
+          <span className="inline sm:hidden">
+            , sur <kbd className={kbdClassName}>M</kbd> pour le menu{" "}
+          </span>
+          et sur <kbd className={kbdClassName}>N</kbd> pour prendre des notes.
+        </p>
       </section>
       <section aria-label="Cours" className="grid gap-4 sm:grid-cols-2">
         {categories.map((cat) => (
