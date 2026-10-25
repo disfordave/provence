@@ -152,7 +152,7 @@ Chaque sous-dossier devient une catégorie de la navigation. Son nom sert d'adre
 ```json
 {
   "title": "Pour les anglophones",
-  "position": 3
+  "position": 4
 }
 ```
 
@@ -304,6 +304,7 @@ src/
 │   ├── bienvenue.mdx
 │   ├── ressources.mdx
 │   ├── anglophones/
+│   ├── examens/
 │   ├── grammaire/
 │   └── vocabulaire/
 │
