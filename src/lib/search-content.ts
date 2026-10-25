@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import GithubSlugger from "github-slugger";
 import type { Article } from "@/app/cours/[...slug]/page";
+import { frenchSpaces } from "@/lib/french-spaces.mjs";
 import type { SearchEntry } from "@/lib/search";
 
 const CONTENT_DIR = path.join(process.cwd(), "src", "content");
@@ -41,7 +42,9 @@ export function parseArticle(
   let chunk: string[] = [];
 
   const flush = () => {
-    const text = plain(chunk.join("\n"));
+    // Results show this text, so it gets the spacing of the pages; the slugs
+    // above keep being built from the text as written, like rehype-slug does.
+    const text = frenchSpaces(plain(chunk.join("\n")));
     if (text || current.headings.length > 0) {
       entries.push({ ...current, text });
     }
@@ -76,7 +79,7 @@ export function parseArticle(
     // A heading closes every section deeper than itself, so the trail is
     // truncated to this level before the new heading joins it.
     trail.length = Math.min(trail.length, level - 2);
-    trail.push(heading);
+    trail.push(frenchSpaces(heading));
 
     flush();
     current = { href: `/cours/${slug}#${id}`, title, headings: [...trail] };
@@ -105,7 +108,7 @@ export async function buildSearchIndex(): Promise<SearchEntry[]> {
 
         return parseArticle(
           slug,
-          metadata?.shortTitle ?? metadata?.title ?? slug,
+          frenchSpaces(metadata?.shortTitle ?? metadata?.title ?? slug),
           source,
         );
       }),

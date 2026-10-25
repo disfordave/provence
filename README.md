@@ -147,12 +147,13 @@ export const metadata = {
 
 Le contenu d'un cours et les informations qui le décrivent restent ainsi au même endroit.
 
-Chaque sous-dossier devient une catégorie de la navigation. Son nom sert d'adresse et, par défaut, de titre. Un fichier `category.json` placé dans le dossier peut lui donner un titre plus lisible, sans changer l'adresse, ainsi qu'une position dans la liste :
+Chaque sous-dossier devient une catégorie de la navigation. Son nom sert d'adresse et, par défaut, de titre. Un fichier `category.json` placé dans le dossier peut lui donner un titre plus lisible, sans changer l'adresse, une description affichée sur la page d'accueil, ainsi qu'une position dans la liste :
 
 ```json
 {
   "title": "Pour les anglophones",
-  "position": 3
+  "description": "Les pièges du français quand on pense en anglais.",
+  "position": 4
 }
 ```
 
@@ -178,12 +179,42 @@ src/components/content/
 
 L'objectif est qu'ils restent suffisamment autonomes pour pouvoir être utilisés depuis un cours sans transformer le contenu lui-même en application React complexe.
 
+C'est le cas de `Quiz`, utilisé par les rubriques « Vérifier ses connaissances » : chaque réponse reste cachée jusqu'à ce qu'on ouvre la question. Le premier paragraphe d'une `Question` en est l'énoncé, et la suite la réponse :
+
+```mdx
+import { Question, Quiz } from "@/components/content/Quiz";
+
+<Quiz>
+<Question>
+Traduisez « When I arrive, I'll call you ».
+
+**Quand j'arriverai, je t'appellerai.**
+
+</Question>
+</Quiz>
+```
+
+### Les exemples sont repérés au build
+
+Dans les cours, un exemple est annoncé par **Exemple :** suivi de la phrase, ou par **Exemple** seul au-dessus d'une liste ou de citations.
+
+Le plugin `src/lib/rehype-examples.mjs` repère ces étiquettes au moment du build et les transmet à `mdx-components.tsx`, qui les met en forme. Les cours gardent ainsi une écriture simple.
+
+### Les espaces insécables sont ajoutées au build
+
+En français, on met une espace avant ? ! ; : et », et après «. Avec une espace ordinaire, la ligne peut se couper juste avant le signe, qui se retrouve seul au début de la ligne suivante.
+
+Le plugin `src/lib/french-spaces.mjs` remplace donc ces espaces par des espaces insécables au moment du build. On continue d'écrire les cours avec une espace normale, et la recherche affiche le même texte que les pages.
+
+Turbopack ne charge les plugins MDX qu'à partir d'un nom de paquet ou d'un chemin : ces deux plugins locaux sont déclarés dans `next.config.ts` avec un chemin absolu.
+
 ---
 
 ## Fonctionnalités
 
 - **Cours en MDX** : chaque cours est un fichier lisible et versionné dans Git.
 - **Composants React dans les cours** : une notion peut devenir interactive lorsqu'une représentation visuelle m'aide à la comprendre.
+- **Quiz** : en fin de cours, les questions cachent leur réponse jusqu'à ce qu'on les ouvre.
 - **Sommaire automatique** : construit à partir des titres réellement rendus dans l'article.
 - **Ancres de titres** : générées avec `rehype-slug`.
 - **Liste des cours automatique** : les fichiers présents dans `src/content` sont découverts sans index manuel.
@@ -298,16 +329,21 @@ src/
 │   ├── Footer.tsx
 │   ├── Logo.tsx
 │   └── content/
+│       ├── Quiz.tsx
 │       └── TensesSlider.tsx
 │
 ├── content/
 │   ├── bienvenue.mdx
+│   ├── essentiel.mdx
 │   ├── ressources.mdx
 │   ├── anglophones/
+│   ├── examens/
 │   ├── grammaire/
 │   └── vocabulaire/
 │
 ├── lib/
+│   ├── french-spaces.mjs
+│   ├── rehype-examples.mjs
 │   ├── search.ts
 │   └── search-content.ts
 │
