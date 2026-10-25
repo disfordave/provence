@@ -99,7 +99,7 @@ export default function InteractiveSidebarMenu({
         inert={!isOpen}
       >
         {children}
-        <div className="h-12" aria-hidden="true"></div>
+        <div className="h-28" aria-hidden="true"></div>
       </div>
 
       <div className="">

@@ -8,7 +8,7 @@ export default function TensesSlider() {
   return (
     <>
       <div className="prose-p:m-0 prose-headings:m-0 flex flex-col items-center gap-4 bg-neutral-100 p-4 dark:bg-black">
-        <p className="text-center text-xl font-black">Les Temps</p>
+        <p className="text-center text-xl font-bold">Les Temps</p>
         <div className="flex w-full flex-col gap-1">
           <p className="text-center leading-tight font-bold">
             Le moment de l&apos;événement

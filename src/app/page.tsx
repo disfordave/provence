@@ -42,7 +42,7 @@ export default async function Home() {
           {tileLetters.map((letter) => (
             <span
               key={letter}
-              className="flex size-12 items-center justify-center border border-neutral-950 text-2xl font-bold odd:-rotate-3 even:rotate-3 nth-3:bg-neutral-950 nth-3:text-white sm:size-14 sm:text-3xl dark:border-neutral-50 dark:nth-3:bg-neutral-50 dark:nth-3:text-black"
+              className="flex size-12 items-center justify-center border border-neutral-950 text-2xl font-bold select-none odd:-rotate-3 even:rotate-3 nth-3:bg-neutral-950 nth-3:text-white sm:size-14 sm:text-3xl dark:border-neutral-50 dark:nth-3:bg-neutral-50 dark:nth-3:text-black"
             >
               {letter}
             </span>
@@ -51,7 +51,7 @@ export default async function Home() {
         <p className="px-4 font-medium tracking-wide text-neutral-600 uppercase dark:text-neutral-400">
           Bonjour et bienvenue sur
         </p>
-        <h1 className="px-4 text-5xl leading-none font-extrabold tracking-tighter uppercase sm:text-7xl">
+        <h1 className="px-4 text-5xl leading-none font-bold tracking-tighter uppercase sm:text-7xl">
           La langue française
         </h1>
         <p className="max-w-xl px-4 text-lg text-neutral-700 dark:text-neutral-300">
@@ -118,7 +118,7 @@ export default async function Home() {
         ))}
       </section>
 
-      <figure className="flex flex-col items-center gap-2 text-center">
+      <figure className="flex flex-col items-center gap-2 px-4 text-center">
         <blockquote className="max-w-xl text-lg font-medium">
           «&nbsp;Il est interdit de pleurer à cause de la langue
           française.&nbsp;»
