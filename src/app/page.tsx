@@ -76,8 +76,8 @@ export default async function Home() {
         {/* The shortcuts need a keyboard. A phone has none, and no mouse or
             trackpad either, which is what the media query can detect. */}
         <p className="hidden px-4 text-sm text-neutral-600 dark:text-neutral-400 any-pointer-fine:block">
-          Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher et
-          sur <kbd className={kbdClassName}>N</kbd> pour prendre des notes.
+          Appuyez sur <kbd className={kbdClassName}>R</kbd> pour rechercher dans
+          les cours.
         </p>
       </section>
       <section aria-label="Cours" className="grid gap-4 sm:grid-cols-2">

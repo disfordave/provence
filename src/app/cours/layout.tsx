@@ -4,7 +4,7 @@ import TableOfContents from "@/components/TableOfContents";
 
 const sidebarStyleClassName = "hidden lg:col-span-1 lg:block";
 // The bottom padding lets the end of a long sidebar scroll clear of the
-// floating notes button.
+// floating back-to-top button.
 const sidebarContentStyleClassName =
   "h-screen overflow-y-auto sticky top-0 p-4 lg:p-6 lg:pb-24";
 
